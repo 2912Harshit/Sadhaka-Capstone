@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./dist/output.css" />
-    <title>Document</title>
+    <title>Travila</title>
+    <link rel="icon" type="image/png" href="./src/assets/images/Clip path group.png">
   </head>
   <body>
     <header>
@@ -24,7 +25,7 @@
         /></a>
         <div class="z-10">
           <div>
-            <ul class="flex gap-8">
+            <ul class="flex gap-10">
               <!-- Home Dropdown -->
               <li class="relative group">
                 <a href="#" class="py-2 hover:text-blue-600"> Home </a>
@@ -48,7 +49,7 @@
 
               <!-- Contact Dropdown -->
               <li class="relative group">
-                <a href="#" class="py-2 hover:text-blue-600"> Contact </a>
+                <a href="#" class="py-2 hover:text-blue-600"> Tours </a>
 
                 <div
                   class="absolute left-0 mt-2 w-48 rounded-lg bg-white shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-200"
@@ -68,7 +69,7 @@
               </li>
               <!-- tours dropdown -->
               <li class="relative group">
-                <a href="#" class="py-2 hover:text-blue-600"> Contact </a>
+                <a href="#" class="py-2 hover:text-blue-600"> Destination </a>
 
                 <div
                   class="absolute left-0 mt-2 w-48 rounded-lg bg-white shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-200"
@@ -87,7 +88,7 @@
                 </div>
               </li>
               <li class="relative group">
-                <a href="#" class="py-2 hover:text-blue-600"> Contact </a>
+                <a href="#" class="py-2 hover:text-blue-600"> Hotel </a>
 
                 <div
                   class="absolute left-0 mt-2 w-48 rounded-lg bg-white shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-200"
@@ -106,7 +107,7 @@
                 </div>
               </li>
               <li class="relative group">
-                <a href="#" class="py-2 hover:text-blue-600"> Contact </a>
+                <a href="#" class="py-2 hover:text-blue-600"> Activities </a>
 
                 <div
                   class="absolute left-0 mt-2 w-48 rounded-lg bg-white shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-200"
@@ -125,7 +126,7 @@
                 </div>
               </li>
               <li class="relative group">
-                <a href="#" class="py-2 hover:text-blue-600"> Contact </a>
+                <a href="#" class="py-2 hover:text-blue-600"> Rental </a>
 
                 <div
                   class="absolute left-0 mt-2 w-48 rounded-lg bg-white shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-200"
@@ -144,7 +145,7 @@
                 </div>
               </li>
               <li class="relative group">
-                <a href="#" class="py-2 hover:text-blue-600"> Contact </a>
+                <a href="#" class="py-2 hover:text-blue-600"> Tickets </a>
 
                 <div
                   class="absolute left-0 mt-2 w-48 rounded-lg bg-white shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-200"
@@ -163,7 +164,7 @@
                 </div>
               </li>
               <li class="relative group">
-                <a href="#" class="py-2 hover:text-blue-600"> Contact </a>
+                <a href="#" class="py-2 hover:text-blue-600"> Pages </a>
 
                 <div
                   class="absolute left-0 mt-2 w-48 rounded-lg bg-white shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-200"
@@ -182,7 +183,7 @@
                 </div>
               </li>
               <li class="relative group">
-                <a href="#" class="py-2 hover:text-blue-600"> Contact </a>
+                <a href="#" class="py-2 hover:text-blue-600"> Blog </a>
 
                 <div
                   class="absolute left-0 mt-2 w-48 rounded-lg bg-white shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-200"
@@ -222,7 +223,7 @@
             </ul>
           </div>
         </div>
-        <div class="flex items-center justify-evenly space-between w-1/6">
+        <div class="flex items-center justify-evenly space-between w-1/5">
           <div>
             <select
               name="language"
@@ -235,10 +236,21 @@
               <option value="fr">FRA</option>
             </select>
           </div>
-          <div>ENG</div>
-          <div>ENG</div>
-          <div>ENG</div>
-          <div>ENG</div>
+          <div>
+            <select
+              name="currency"
+              id="currency-btn"
+              class="bg-transparent border-none"
+              defaultValue="ENG"
+            >
+              <option value="dollar">USD</option>
+              <option value="euro">EU</option>
+              <option value="rupee">IND</option>
+            </select>
+          </div>
+          <button class="bg-gray-200 px-3 py-1 hover:bg-cyan-400 rounded-4xl"><img src="./src/assets/images/light.svg.png" alt=""></button>
+          <div class="px-4 py-1 font-semibold bg-gray-300 rounded-4xl">Sign In</div>
+          <div class="bg-yellow-300 p-4 rounded-4xl"><img src="./src/assets/images/menu.svg.png" alt=""></div>
         </div>
       </div>
     </header>
@@ -249,19 +261,19 @@
           background-image: url(&quot;./src/assets/images/Hero\ bg.avif&quot;);
         "
       >
-        <div class="relative flex items-center justify-center">
+        <div class="relative flex items-center justify-evenly">
           <div>
             <div
-              class="inline-block font-bold rounded-3xl p-2 text-xs bg-yellow-300"
+              class="inline-block text-xl font-bold rounded-3xl p-2 bg-yellow-300"
             >
               Discover the World
             </div>
             <div>
               <p class="text-5xl font-bold p-2">Unleash Your Wanderlust</p>
               <p class="text-5xl font-bold p-2">Book Your Next Journey</p>
-              <p class="text-s p-2">
-                Crafting Exceptional Journeys: Your Global Escape Planner.
-                Unleash Your Wanderlust: Seamless Travel, Extraordinary
+              <p class="text-xl p-2">
+                Crafting Exceptional Journeys: Your Global Escape Planner.</p>
+               <p class="text-xl p-2"> Unleash Your Wanderlust: Seamless Travel, Extraordinary
                 Adventures
               </p>
             </div>
@@ -357,7 +369,7 @@
                 <select
                   class="w-full bg-transparent outline-none font-semibold cursor-pointer"
                 >
-                  <option>New York, USA</option>
+                  <option>New York</option>
                   <option>Los Angeles</option>
                   <option>Chicago</option>
                 </select>
@@ -528,7 +540,7 @@
                   >
                     <div id="category-btn" class="w-20">Categories</div>
                     <img
-                      src=".\src\assets\arrow-down.svg.png"
+                      src="./src/assets/images/arrow-down.svg.png"
                       alt=""
                       class="h-4"
                     />
@@ -582,7 +594,7 @@
                   >
                     <span id="duration-btn">Duration</span>
                     <img
-                      src=".\src\assets\arrow-down.svg.png"
+                      src="./src/assets/images/arrow-down.svg.png"
                       alt=""
                       class="h-4"
                     />
@@ -656,7 +668,8 @@
                   >
                     <div id="rating-btn" class="transition duration-1000">Rating</div>
                     <img
-                      src=".\src\assets\arrow-down.svg.png"
+                       src="./src/assets/images/arrow-down.svg.png"
+
                       alt=""
                       class="h-4"
                     />
@@ -706,7 +719,7 @@
                   >
                     <span id="price-range-btn">Price Range</span>
                     <img
-                      src=".\src\assets\arrow-down.svg.png"
+                       src="./src/assets/images/arrow-down.svg.png"
                       alt=""
                       class="h-4"
                     />
@@ -791,7 +804,7 @@
           <div class="flex justify-between">
             <button value="lexus" class="p-2 bg-white car-logo rounded-2xl hover:bg-cyan-300 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"><img src="./src/assets/images/lexus.png.svg" alt=""></button>
             <button value="mercedes" class="p-2 bg-white car-logo rounded-2xl hover:bg-cyan-300 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"><img src="./src/assets/images/mer.png.png" alt=""></button>
-            <button value="buggati" class="p-2 bg-white car-logo rounded-2xl hover:bg-cyan-300 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"><img src="./src/assets/images/bugatti.png.png" alt=""></button>
+            <button value="bugatti" class="p-2 bg-white car-logo rounded-2xl hover:bg-cyan-300 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"><img src="./src/assets/images/bugatti.png.png" alt=""></button>
             <button value="jaguar" class="p-2 bg-white car-logo rounded-2xl hover:bg-cyan-300 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"><img src="./src/assets/images/jaguar.png.png" alt=""></button>
             <button value="honda" class="p-2 bg-white car-logo rounded-2xl hover:bg-cyan-300 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"><img src="./src/assets/images/honda.png.png" alt=""></button>
             <button value="chevrolet" class="p-2 bg-white car-logo rounded-2xl hover:bg-cyan-300 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"><img src="./src/assets/images/chevrolet.png.png" alt=""></button>

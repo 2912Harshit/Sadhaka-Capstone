@@ -282,7 +282,8 @@ nextBtn.addEventListener("click",()=>{
   if(currentIndex==maxIndex){
     nextBtn.classList.remove("bg-black");
     nextBtn.classList.remove("text-white");
-  }else if(currentIndex>0){
+  }
+  if(currentIndex>0){
     prevBtn.classList.add("bg-black");
     prevBtn.classList.add("text-white");
 
@@ -298,7 +299,8 @@ prevBtn.addEventListener("click",()=>{
   if(currentIndex==0){
     prevBtn.classList.remove("bg-black");
     prevBtn.classList.remove("text-white");
-  }else if(currentIndex<maxIndex){
+  }
+  if(currentIndex<maxIndex){
     nextBtn.classList.add("bg-black");
     nextBtn.classList.add("text-white");
   }

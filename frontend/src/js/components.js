@@ -102,43 +102,84 @@ export function renderTours(tourSection, tours, filters = {}) {
 function carCard(car){
     return `
       <div
-                class="shadow-rounded-2xl shrink-0 w-[calc((100%-3rem)/3)] h-150 flex flex-col justify-between rounded-4xl border border-gray-200"
-                style="
-                  background-image: url(&quot;${car.image}&quot;);
-                "
-              >
-                <div class="flex justify-between p-3">
-                  <div class="rounded-4xl w-1/3 flex items-center justify-center bg-white text-amber-300">Top Rated</div>
-                  <button class="rounded-full p-1 bg-white hover:text-red-500">fav</button>
-                </div>
-                <div
-                  class=" flex flex-col justify-between p-2 h-4/9 rounded-4xl bg-white relative"
-                >
-                <div class="p-2 flex flex-col gap-2 border-b border-b-gray-400">
-                  <div class="text-3xl font-semibold">${car.brand} ${car.model}
-                  </div>
-  
-                  <div class="class flex gap-2"><img class="h-5" src="./src/assets/images/location.svg.png" alt="">${car.location}</div>
-  
-                </div>
-                  <div class="grid grid-cols-2 w-full p-2 text-gray-400 self-center gap-4">
-                    <div class="grid grid-cols-2 w-1/4"><img class="self-center" src="./src/assets/images/mile.svg.png" alt="">${car.mileage}</div>
-                    <div class="grid grid-cols-2 w-1/4"><img src="./src/assets/images/automatic.svg.png" alt="">${car.transmission}</div>
-                    <div class="grid grid-cols-2 w-1/4"><img class="self-center" src="./src/assets/images/fuel.svg.png" alt="">${car.fuel}</div>
-                    <div class="grid grid-cols-2 w-1/4"><img src="./src/assets/images/seat.svg.png" alt="">${car.seats}</div>
-                    
-                  </div>
-                  <div class="flex justify-between w-4/5 p-1 ">
-                    <div class="text-gray-400"><span class="text-3xl font-semibold text-black">$${car.price}</span>/person</div>
-                    <button class="rounded-4xl p-3 bg-black text-white hover:bg-gray-500">Book now</button>
-                  </div>
-                  <div
-                    class="absolute right-1/6 -top-1/16  rounded-4xl p-1 shadow-2xl shadow-black bg-white"
-                  >
-                    ⭐${car.rating} ( ${car.reviews} reviews )
-                  </div>
-                </div>
-              </div>
+  class="overflow-hidden shrink-0 w-[calc((100%-3rem)/3)] h-150 flex flex-col rounded-4xl border border-gray-200 shadow-lg bg-white"
+>
+  <!-- Car Image -->
+  <div class="relative h-[55%]">
+    <img
+      src="${car.image}"
+      alt="${car.brand} ${car.model}"
+      class="w-full h-full object-cover"
+    />
+
+    <div class="absolute top-3 left-3 rounded-full px-4 py-1 bg-white text-amber-400 font-medium text-sm">
+      Top Rated
+    </div>
+
+    <button
+      class="absolute top-3 right-3 rounded-full p-2 bg-white hover:text-red-500"
+    >
+      fav
+    </button>
+  </div>
+
+  <!-- Bottom Card -->
+  <div
+    class="flex flex-col justify-between flex-1 p-2 rounded-t-4xl bg-white relative"
+  >
+    <div class="p-2 flex flex-col gap-2 border-b border-b-gray-400">
+      <div class="text-3xl font-semibold">
+        ${car.brand} ${car.model}
+      </div>
+
+      <div class="flex gap-2">
+        <img class="h-5" src="./src/assets/images/location.svg.png" alt="">
+        ${car.location}
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 w-full p-2 text-gray-400 gap-4">
+      <div class="flex items-center gap-2">
+        <img class="h-5" src="./src/assets/images/mile.svg.png" alt="">
+        ${car.mileage}
+      </div>
+
+      <div class="flex items-center gap-2">
+        <img class="h-5" src="./src/assets/images/automatic.svg.png" alt="">
+        ${car.transmission}
+      </div>
+
+      <div class="flex items-center gap-2">
+        <img class="h-5" src="./src/assets/images/fuel.svg.png" alt="">
+        ${car.fuel}
+      </div>
+
+      <div class="flex items-center gap-2">
+        <img class="h-5" src="./src/assets/images/seat.svg.png" alt="">
+        ${car.seats}
+      </div>
+    </div>
+
+    <div class="flex justify-between w-4/5 p-1">
+      <div class="text-gray-400">
+        <span class="text-3xl font-semibold text-black">
+          $${car.price}
+        </span>
+        /person
+      </div>
+
+      <button class="rounded-4xl p-3 bg-black text-white hover:bg-gray-500">
+        Book now
+      </button>
+    </div>
+
+    <div
+      class="absolute right-1/6 -top-1/16 rounded-4xl p-1 shadow-2xl bg-white"
+    >
+      ⭐${car.rating} (${car.reviews} reviews)
+    </div>
+  </div>
+</div>
     `;
   }
 
