@@ -34,30 +34,32 @@ function tourCard(tour) {
   console.log(tour);
   return `
             <div
-              class="border h-150 flex flex-col justify-between rounded-4xl"
+              class="border overflow-hidden bg-cover bg-center h-[380px] sm:h-[440px] lg:h-150 flex flex-col justify-between rounded-3xl sm:rounded-4xl"
               style="
                 background-image: url(&quot;${tour.bg_image}&quot;);
               "
             >
-              <div class="flex justify-between p-3">
-                <div class="rounded-4xl w-1/3 flex items-center justify-center bg-white text-amber-300">Top Rated</div>
-                <button class="rounded-full p-1 bg-white hover:text-red-500">fav</button>
+              <div class="flex justify-between items-start p-2 sm:p-3 gap-2">
+                <div class="rounded-4xl px-3 py-1 sm:w-1/3 flex items-center justify-center bg-white text-amber-300 text-xs sm:text-sm whitespace-nowrap">Top Rated</div>
+                <button class="rounded-full p-1.5 sm:p-2 bg-white hover:text-red-500 text-xs sm:text-sm shrink-0">
+                <img src="./src/assets/images/heart.png" alt="heart">
+                </button>
               </div>
               <div
-                class=" flex flex-col justify-between p-2 h-4/9 rounded-4xl bg-white relative"
+                class="flex flex-col justify-between gap-1 sm:gap-2 p-3 sm:p-4 min-h-[42%] rounded-3xl sm:rounded-4xl bg-white relative"
               >
-                <div class="p-2 text-4xl font-semibold">${tour.title}
+                <div class="text-xl sm:text-2xl lg:text-4xl font-semibold  pr-2">${tour.title}
                 </div>
-                <div class="flex justify-between w-1/2 p-2 text-gray-400">
+                <div class="flex flex-wrap justify-between gap-x-4 gap-y-1 text-xs sm:text-sm lg:text-base text-gray-400">
                   <div>${tour.days} days ${tour.nights} nights</div>
                   <div>4-6 guests</div>
                 </div>
-                <div class="flex justify-between w-4/5 p-2 ">
-                  <div class="text-gray-400"><span class="text-3xl font-semibold text-black">$${tour.price}</span>/person</div>
-                  <button class="rounded-4xl p-3 bg-black text-white hover:bg-gray-500">Book now</button>
+                <div class="flex items-center justify-between gap-2 pt-1">
+                  <div class="text-gray-400 text-xs sm:text-sm shrink-0"><span class="text-lg sm:text-2xl lg:text-3xl font-semibold text-black">$${tour.price}</span>/person</div>
+                  <button class="rounded-4xl px-4 py-2 sm:p-3 bg-black text-white hover:bg-gray-500 text-xs sm:text-sm shrink-0">Book now</button>
                 </div>
                 <div
-                  class="absolute right-1/6 -top-1/16  rounded-4xl p-1 shadow-2xl shadow-black bg-white"
+                  class="absolute right-3 sm:right-4 -top-4 sm:-top-5 rounded-4xl px-2 py-1 shadow-2xl shadow-black bg-white text-xs sm:text-sm whitespace-nowrap"
                 >
                   ⭐${tour.rating} ( ${tour.reviews} reviews )
                 </div>
@@ -68,9 +70,9 @@ function tourCard(tour) {
 
 export function renderTours(tourSection, tours, filters = {}) {
   tourSection.innerHTML = ``;
-  if(filters.sort==0){
-    tours.sort((a,b)=>a.price-b.price);
-  }else tours.sort((a,b)=>b.price-a.price);
+  if (filters.sort == 0) {
+    tours.sort((a, b) => a.price - b.price);
+  } else tours.sort((a, b) => b.price - a.price);
   const {
     category: fCategory,
     days: fDays,
@@ -85,7 +87,7 @@ export function renderTours(tourSection, tours, filters = {}) {
       days: tDays,
       nights: tNights,
       rating: tRating,
-      price:tPrice
+      price: tPrice,
     } = tour;
     if (fCategory != tCategory && fCategory != "all") return;
     // console.log("why am here");
@@ -97,91 +99,103 @@ export function renderTours(tourSection, tours, filters = {}) {
     console.log("i am here");
     tourSection.innerHTML += tourCard(tour);
   });
-};
+}
 
-function carCard(car){
-    return `
+function carCard(car) {
+  return `
       <div
-  class="overflow-hidden shrink-0 w-[calc((100%-3rem)/3)] h-150 flex flex-col rounded-4xl border border-gray-200 shadow-lg bg-white"
+  class="overflow-hidden shrink-0 w-[85%] sm:w-[calc((100%-1rem)/2)] lg:w-[calc((100%-3rem)/3)] h-[400px] sm:h-[440px] lg:h-150 flex flex-col rounded-3xl sm:rounded-4xl border border-gray-200 shadow-lg bg-white"
 >
   <!-- Car Image -->
-  <div class="relative h-[55%]">
+  <div class="relative h-[50%] sm:h-[55%] shrink-0">
     <img
       src="${car.image}"
       alt="${car.brand} ${car.model}"
       class="w-full h-full object-cover"
+      loading="lazy"
+  decoding="async"
     />
 
-    <div class="absolute top-3 left-3 rounded-full px-4 py-1 bg-white text-amber-400 font-medium text-sm">
+    <div class="absolute top-2 sm:top-3 left-2 sm:left-3 rounded-full px-3 sm:px-4 py-1 bg-white text-amber-400 font-medium text-xs sm:text-sm whitespace-nowrap">
       Top Rated
     </div>
 
     <button
-      class="absolute top-3 right-3 rounded-full p-2 bg-white hover:text-red-500"
+      class="absolute top-2 sm:top-3 right-2 sm:right-3 rounded-full p-1.5 sm:p-2 bg-white hover:text-red-500 text-xs sm:text-sm"
     >
-      fav
+      <img src="./src/assets/images/heart.png" alt="heart" >
     </button>
   </div>
 
   <!-- Bottom Card -->
   <div
-    class="flex flex-col justify-between flex-1 p-2 rounded-t-4xl bg-white relative"
+    class="flex flex-col justify-between flex-1 min-h-0 p-2 rounded-t-3xl sm:rounded-t-4xl bg-white relative"
   >
-    <div class="p-2 flex flex-col gap-2 border-b border-b-gray-400">
-      <div class="text-3xl font-semibold">
+    <div class="p-2 flex flex-col gap-1 sm:gap-2 border-b border-b-gray-400">
+      <div class="text-lg sm:text-2xl lg:text-3xl font-semibold truncate">
         ${car.brand} ${car.model}
       </div>
 
-      <div class="flex gap-2">
-        <img class="h-5" src="./src/assets/images/location.svg.png" alt="">
+      <div class="flex items-center gap-2 text-xs sm:text-sm truncate">
+        <img class="h-4 sm:h-5 shrink-0" src="./src/assets/images/location.svg.png" alt=""
+        loading="lazy"
+  decoding="async">
         ${car.location}
       </div>
     </div>
 
-    <div class="grid grid-cols-2 w-full p-2 text-gray-400 gap-4">
-      <div class="flex items-center gap-2">
-        <img class="h-5" src="./src/assets/images/mile.svg.png" alt="">
+    <div class="grid grid-cols-2 w-full p-2 text-gray-400 gap-2 sm:gap-4 text-xs sm:text-sm">
+      <div class="flex items-center gap-2 truncate">
+        <img class="h-4 sm:h-5 shrink-0" src="./src/assets/images/mile.svg.png" alt=""
+        loading="lazy"
+  decoding="async">
         ${car.mileage}
       </div>
 
-      <div class="flex items-center gap-2">
-        <img class="h-5" src="./src/assets/images/automatic.svg.png" alt="">
+      <div class="flex items-center gap-2 truncate">
+        <img class="h-4 sm:h-5 shrink-0" src="./src/assets/images/automatic.svg.png" alt=""
+        loading="lazy"
+  decoding="async">
         ${car.transmission}
       </div>
 
-      <div class="flex items-center gap-2">
-        <img class="h-5" src="./src/assets/images/fuel.svg.png" alt="">
+      <div class="flex items-center gap-2 truncate">
+        <img class="h-4 sm:h-5 shrink-0" src="./src/assets/images/fuel.svg.png" alt=""
+        loading="lazy"
+  decoding="async">
         ${car.fuel}
       </div>
 
-      <div class="flex items-center gap-2">
-        <img class="h-5" src="./src/assets/images/seat.svg.png" alt="">
+      <div class="flex items-center gap-2 truncate">
+        <img class="h-4 sm:h-5 shrink-0" src="./src/assets/images/seat.svg.png" alt=""
+        loading="lazy"
+  decoding="async">
         ${car.seats}
       </div>
     </div>
 
-    <div class="flex justify-between w-4/5 p-1">
-      <div class="text-gray-400">
-        <span class="text-3xl font-semibold text-black">
+    <div class="flex items-center justify-between gap-2 p-1">
+      <div class="text-gray-400 text-xs sm:text-sm shrink-0">
+        <span class="text-lg sm:text-2xl lg:text-3xl font-semibold text-black">
           $${car.price}
         </span>
         /person
       </div>
 
-      <button class="rounded-4xl p-3 bg-black text-white hover:bg-gray-500">
+      <button class="rounded-4xl px-4 py-2 sm:p-3 bg-black text-white hover:bg-gray-500 text-xs sm:text-sm shrink-0">
         Book now
       </button>
     </div>
 
     <div
-      class="absolute right-1/6 -top-1/16 rounded-4xl p-1 shadow-2xl bg-white"
+      class="absolute right-3 sm:right-4 -top-4 sm:-top-5 rounded-4xl px-2 py-1 shadow-2xl bg-white text-xs sm:text-sm whitespace-nowrap"
     >
       ⭐${car.rating} (${car.reviews} reviews)
     </div>
   </div>
 </div>
     `;
-  }
+}
 
 export function renderCars(carSection, cars, filters = {}) {
   carSection.innerHTML = ``;
@@ -189,8 +203,8 @@ export function renderCars(carSection, cars, filters = {}) {
   //   tours.sort((a,b)=>a.price-b.price);
   // }else tours.sort((a,b)=>b.price-a.price);
   // const {
-    //   category: fCategory,
-    //   days: fDays,
+  //   category: fCategory,
+  //   days: fDays,
   //   nights: fNights,
   //   rating: fRating,
   //   priceFrom: fPriceFrom,
@@ -203,11 +217,11 @@ export function renderCars(carSection, cars, filters = {}) {
       location: cLocation,
       mileage: cMileage,
       transmission: cTransmission,
-      fuel:cFuel,
-      seats:cSeats,
-      price:cPrice,
-      rating:cRating,
-      reviews:cReviews
+      fuel: cFuel,
+      seats: cSeats,
+      price: cPrice,
+      rating: cRating,
+      reviews: cReviews,
     } = car;
     // if (fCategory != tCategory && fCategory != "all") return;
     // // console.log("why am here");
@@ -218,8 +232,8 @@ export function renderCars(carSection, cars, filters = {}) {
     // if (fPriceFrom > tPrice || tPrice > fPriceTo) return;
     // console.log("i am here");
     // if(filters.brand!=cBrand)return;
-    if(filters.brand.size!=0 && !filters.brand.has(car.brand.toLowerCase()))return;
-    carSection.innerHTML += carCard(car);
+    if (filters.brand.size != 0 && !filters.brand.has(car.brand.toLowerCase()))
+      return;
+    carSection.insertAdjacentHTML("afterbegin", carCard(car));
   });
 }
-

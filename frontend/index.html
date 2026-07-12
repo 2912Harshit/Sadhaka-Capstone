@@ -3,29 +3,63 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Discover adventure tours, beach vacations, luxury cruises, and food experiences. Book your next unforgettable trip with TravelGo."
+    />
     <link rel="stylesheet" href="./dist/output.css" />
     <title>Travila</title>
-    <link rel="icon" type="image/png" href="./src/assets/images/Clip path group.png">
+    <link
+      rel="icon"
+      type="image/png"
+      href="./src/assets/images/Clip path group.png"
+    />
+    <!-- <link
+    rel="preload"
+    as="image"
+    href="./src/assets/images/Hero bg.avif"
+  > -->
   </head>
   <body>
-    <header>
-      <section class="bg-black flex items-center justify-evenly h-10 text-lg">
-        <div class="flex items-center justify-evenly space-between w-2/5">
-          <img src="./src/assets/images/arrow-down.svg.png" alt="Logo" />
-          <p class="text-white align-middle">
-            Unlock Your Travel with Trivela - Your Gateway to Extraordinary
-            Experiences
+    <header class="relative z-50 sticky top-0 bg-white shadow-sm">
+      <section
+        class="bg-black flex items-center justify-center gap-2 sm:gap-3 h-auto py-2 lg:h-10 lg:py-0 px-4 text-xs sm:text-sm lg:text-lg"
+      >
+        <div
+          class="flex items-center justify-center gap-2 sm:gap-3 lg:w-2/5 lg:justify-evenly text-center min-w-0"
+        >
+          <!-- <img
+            src="./src/assets/images/arrow-down.svg.png"
+            alt
+            class="hidden sm:block w-4 h-4 shrink-0" /> -->
+          <h3 class="text-white align-middle truncate sm:whitespace-normal">
+            <span class="hidden sm:inline"
+              >Unlock Your Travel with Trivela - Your Gateway to Extraordinary
+              Experiences</span
+            >
+            <span class="sm:hidden">Unlock extraordinary travel</span>
+          </h3>
+          <p class="text-orange-500 align-middle shrink-0 whitespace-nowrap">
+            Get this now
           </p>
-          <p class="text-orange-500 align-middle">Get this now</p>
+          <!-- <img class="bg-orange-50" src="./src/assets/images/right-arrow.png" alt="heart" loading="lazy"
+decoding="async"> -->
         </div>
       </section>
-      <div class="flex items-center justify-between h-2/5 p-5 text-lg">
-        <a href="#" class="object-contain pl-1"
-          ><img class="h-8" src="./src/assets/images/logo.svg fill.png" alt="Logo"
+      <div
+        class="flex items-center justify-between gap-3 p-4 sm:p-5 lg:px-8 text-lg"
+      >
+        <a href="#" class="object-contain pl-1 shrink-0"
+          ><img
+            class="h-6 sm:h-7 lg:h-8"
+            src="./src/assets/images/logo.svg fill.png"
+            alt="Logo"
+            loading="lazy"
+            decoding="async"
         /></a>
-        <div class="z-10">
+        <div class="z-10 hidden lg:block">
           <div>
-            <ul class="flex gap-10">
+            <ul class="flex gap-6 xl:gap-10">
               <!-- Home Dropdown -->
               <li class="relative group">
                 <a href="#" class="py-2 hover:text-blue-600"> Home </a>
@@ -223,8 +257,11 @@
             </ul>
           </div>
         </div>
-        <div class="flex items-center justify-evenly space-between w-1/5">
-          <div>
+        <div
+          class="flex items-center justify-end gap-2 sm:gap-3 lg:justify-evenly lg:w-1/5"
+        >
+          <div class="hidden lg:block">
+            <label for="language" class="sr-only"> Language </label>
             <select
               name="language"
               id="language"
@@ -236,10 +273,11 @@
               <option value="fr">FRA</option>
             </select>
           </div>
-          <div>
+          <div class="hidden lg:block">
+            <label for="currency" class="sr-only">Currency</label>
             <select
               name="currency"
-              id="currency-btn"
+              id="currency"
               class="bg-transparent border-none"
               defaultValue="ENG"
             >
@@ -248,68 +286,182 @@
               <option value="rupee">IND</option>
             </select>
           </div>
-          <button class="bg-gray-200 px-3 py-1 hover:bg-cyan-400 rounded-4xl"><img src="./src/assets/images/light.svg.png" alt=""></button>
-          <div class="px-4 py-1 font-semibold bg-gray-300 rounded-4xl">Sign In</div>
-          <div class="bg-yellow-300 p-4 rounded-4xl"><img src="./src/assets/images/menu.svg.png" alt=""></div>
+          <button
+            class="bg-gray-200 px-3 py-1 hover:bg-cyan-400 rounded-4xl shrink-0"
+            aria-label="Toggle theme"
+          >
+            <img src="./src/assets/images/light.svg.png" alt="Light" />
+          </button>
+          <button
+            class="hidden lg:inline-block px-4 py-1 font-semibold bg-gray-300 rounded-4xl"
+          >
+            Sign In
+          </button>
+          <button
+            id="mobile-menu-btn"
+            class="lg:hidden bg-yellow-300 p-3 rounded-4xl shrink-0"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+          >
+            <img
+              id="menu-icon-open"
+              src="./src/assets/images/menu.svg.png"
+              alt
+              class="w-5 h-5"
+            />
+            <svg
+              id="menu-icon-close"
+              xmlns="http://www.w3.org/2000/svg"
+              class="hidden w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile nav panel -->
+      <div
+        id="mobile-menu"
+        class="hidden lg:hidden absolute top-full left-0 w-full bg-white border-t border-gray-200 shadow-lg max-h-[75vh] overflow-y-auto"
+      >
+        <nav class="flex flex-col p-4 gap-1 text-base">
+          <a href="#" class="px-3 py-3 rounded-lg hover:bg-gray-100">Home</a>
+          <a href="#" class="px-3 py-3 rounded-lg hover:bg-gray-100">Tours</a>
+          <a href="#" class="px-3 py-3 rounded-lg hover:bg-gray-100"
+            >Destination</a
+          >
+          <a href="#" class="px-3 py-3 rounded-lg hover:bg-gray-100">Hotel</a>
+          <a href="#" class="px-3 py-3 rounded-lg hover:bg-gray-100"
+            >Activities</a
+          >
+          <a href="#" class="px-3 py-3 rounded-lg hover:bg-gray-100">Rental</a>
+          <a href="#" class="px-3 py-3 rounded-lg hover:bg-gray-100">Tickets</a>
+          <a href="#" class="px-3 py-3 rounded-lg hover:bg-gray-100">Pages</a>
+          <a href="#" class="px-3 py-3 rounded-lg hover:bg-gray-100">Blog</a>
+          <a href="#" class="px-3 py-3 rounded-lg hover:bg-gray-100">Contact</a>
+        </nav>
+        <div class="flex items-center gap-4 px-4 pb-3">
+          <div>
+            <label for="language-mobile" class="sr-only"> Language </label>
+            <select
+              name="language-mobile"
+              id="language-mobile"
+              class="bg-gray-100 rounded-full px-3 py-2 border-none"
+            >
+              <option value="en">ENG</option>
+              <option value="es">ESP</option>
+              <option value="fr">FRA</option>
+            </select>
+          </div>
+          <div>
+            <label for="currency-mobile" class="sr-only">Currency</label>
+            <select
+              name="currency-mobile"
+              id="currency-mobile"
+              class="bg-gray-100 rounded-full px-3 py-2 border-none"
+            >
+              <option value="dollar">USD</option>
+              <option value="euro">EU</option>
+              <option value="rupee">IND</option>
+            </select>
+          </div>
+        </div>
+        <div class="px-4 pb-4">
+          <button
+            class="w-full px-4 py-3 font-semibold bg-gray-300 rounded-full"
+          >
+            Sign In
+          </button>
         </div>
       </div>
     </header>
-    <main>
+    <main class="w-full">
       <section
-        class="relative h-4/5 bg-cover bg-center pb-40"
+        class="relative bg-center bg-cover pt-10 pb-10 sm:pt-14 sm:pb-14 lg:pt-20 lg:pb-40 px-4 sm:px-6 lg:px-10"
         style="
           background-image: url(&quot;./src/assets/images/Hero\ bg.avif&quot;);
         "
       >
-        <div class="relative flex items-center justify-evenly">
+        <div
+          class="relative flex flex-col lg:flex-row items-center justify-center lg:justify-evenly gap-8 lg:gap-6 text-center lg:text-left"
+        >
+          <!-- <img class="absolute z-10 object-center object-fill" src="./src/assets/images/Hero bg.avif" alt=""> -->
           <div>
-            <div
-              class="inline-block text-xl font-bold rounded-3xl p-2 bg-yellow-300"
+            <p
+              class="inline-block text-base sm:text-lg lg:text-xl font-bold rounded-3xl p-2 bg-yellow-300"
             >
               Discover the World
-            </div>
+            </p>
             <div>
-              <p class="text-5xl font-bold p-2">Unleash Your Wanderlust</p>
-              <p class="text-5xl font-bold p-2">Book Your Next Journey</p>
-              <p class="text-xl p-2">
-                Crafting Exceptional Journeys: Your Global Escape Planner.</p>
-               <p class="text-xl p-2"> Unleash Your Wanderlust: Seamless Travel, Extraordinary
+              <h1
+                class="text-3xl sm:text-4xl lg:text-5xl font-bold p-2 leading-tight"
+              >
+                Unleash Your Wanderlust
+              </h1>
+              <p
+                class="text-3xl sm:text-4xl lg:text-5xl font-bold p-2 leading-tight"
+              >
+                Book Your Next Journey
+              </p>
+              <p class="text-base sm:text-lg lg:text-xl p-2">
+                Crafting Exceptional Journeys: Your Global Escape Planner.
+              </p>
+              <p class="text-base sm:text-lg lg:text-xl p-2">
+                Unleash Your Wanderlust: Seamless Travel, Extraordinary
                 Adventures
               </p>
             </div>
           </div>
-          <div class="pt-10 pb-10 flex flex-col items-center justify-center">
-            <div class="overflow-hidden rounded-2xl border-3 m-3">
+          <div
+            class="pt-4 pb-4 lg:pt-10 lg:pb-10 flex flex-row lg:flex-col items-center justify-center gap-3"
+          >
+            <div class="overflow-hidden rounded-2xl border-3 shrink-0">
               <img
-                class="h-40"
+                class="h-20 sm:h-28 lg:h-40"
                 src="./src/assets/images/temp photo.avif"
-                alt=""
+                alt="floating image"
               />
             </div>
-            <div class="overflow-hidden rounded-2xl border-3 m-3">
+            <div
+              class="overflow-hidden rounded-2xl border-3 shrink-0 hidden sm:block"
+            >
               <img
-                class="h-40"
+                class="h-20 sm:h-28 lg:h-40"
                 src="./src/assets/images/temp photo.avif"
-                alt=""
+                alt="floating image"
               />
             </div>
-            <div class="overflow-hidden rounded-2xl border-3 m-3">
+            <div
+              class="overflow-hidden rounded-2xl border-3 shrink-0 hidden lg:block"
+            >
               <img
-                class="h-40 rounded"
+                class="h-20 sm:h-28 lg:h-40 rounded"
                 src="./src/assets/images/temp photo.avif"
-                alt=""
+                alt="floating image"
               />
             </div>
           </div>
         </div>
         <section
-          class="absolute left-1/2 -translate-x-1/2 flex justify-center bg-slate-100 z-10 rounded-3xl"
+          class="relative lg:absolute lg:left-1/2 lg:-translate-x-1/2 flex justify-center z-10 mt-8 lg:mt-0"
         >
-          <div class="w-full max-w-6xl bg-white rounded-3xl shadow-xl p-8">
+          <div
+            class="w-full max-w-6xl bg-white rounded-2xl sm:rounded-3xl shadow-xl p-4 sm:p-6 lg:p-8"
+          >
             <!-- Navigation -->
-            <div class="flex items-center justify-between mb-8">
+            <div class="flex items-center justify-between gap-2 mb-6 lg:mb-8">
               <div
-                class="flex items-center gap-2 relative rounded-full"
+                class="flex items-center gap-1 sm:gap-2 relative rounded-full overflow-x-auto max-w-[70%] sm:max-w-none"
                 id="tabs"
               >
                 <!-- sliding indicator -->
@@ -319,37 +471,40 @@
                 ></div>
 
                 <button
-                  class="text-amber-300 px-6 py-3 rounded-full font-medium z-10 tab hover:text-amber-300"
+                  class="text-amber-300 px-3 sm:px-6 py-2 sm:py-3 rounded-full font-medium z-10 tab hover:text-amber-300 whitespace-nowrap text-xs sm:text-base"
                 >
                   Tours
                 </button>
 
                 <button
-                  class="px-5 py-3 rounded-full text-gray-500 transition z-10 tab hover:text-amber-300"
+                  class="px-3 sm:px-5 py-2 sm:py-3 rounded-full text-gray-500 transition z-10 tab hover:text-amber-300 whitespace-nowrap text-xs sm:text-base"
                 >
                   Hotels
                 </button>
 
                 <button
-                  class="px-5 py-3 rounded-full text-gray-500 transition z-10 tab hover:text-amber-300"
+                  class="px-3 sm:px-5 py-2 sm:py-3 rounded-full text-gray-500 transition z-10 tab hover:text-amber-300 whitespace-nowrap text-xs sm:text-base"
                 >
                   Tickets
                 </button>
 
                 <button
-                  class="px-5 py-3 rounded-full text-gray-500 transition z-10 tab hover:text-amber-300"
+                  class="px-3 sm:px-5 py-2 sm:py-3 rounded-full text-gray-500 transition z-10 tab hover:text-amber-300 whitespace-nowrap text-xs sm:text-base"
                 >
                   Rental
                 </button>
 
                 <button
-                  class="px-5 py-3 rounded-full text-gray-500 transition z-10 tab hover:text-amber-300"
+                  class="px-3 sm:px-5 py-2 sm:py-3 rounded-full text-gray-500 transition z-10 tab hover:text-amber-300 whitespace-nowrap text-xs sm:text-base"
                 >
                   Activities
                 </button>
               </div>
 
-              <a href="#" class="text-sm text-gray-400 hover:text-black">
+              <a
+                href="#"
+                class="hidden sm:block text-sm text-gray-400 hover:text-black shrink-0 ml-2"
+              >
                 Need some help?
               </a>
             </div>
@@ -357,53 +512,92 @@
             <!-- Search Card -->
 
             <div
-              class="flex items-center rounded-2xl border border-gray-200 divide-x overflow-visible"
+              class="flex flex-col lg:flex-row items-stretch lg:items-center rounded-2xl border border-gray-200 divide-y lg:divide-y-0 lg:divide-x overflow-visible"
             >
               <!-- Location -->
 
-              <div class="flex-1 px-6 py-5">
-                <label class="block text-xs text-gray-400 mb-2">
-                  Location
-                </label>
-
-                <select
-                  class="w-full bg-transparent outline-none font-semibold cursor-pointer"
+              <div class="relative w-full lg:flex-1 px-5 sm:px-6 py-4 sm:py-5">
+                <button
+                  id="location-btn"
+                  class="w-full flex justify-between items-center"
                 >
-                  <option>New York</option>
-                  <option>Los Angeles</option>
-                  <option>Chicago</option>
-                </select>
+                  <div class="text-left">
+                    <p class="text-xs text-gray-400">Location</p>
+
+                    <p id="location-text" class="font-semibold mt-1">
+                      New York
+                    </p>
+                  </div>
+
+                  <svg
+                    class="w-5 h-5 text-gray-500"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </button>
+
+                <!-- Dropdown -->
+
+                <div
+                  id="location-menu"
+                  class="hidden absolute right-0 top-full mt-4 w-40 max-w-[90vw] bg-white rounded-2xl shadow-2xl border border-gray-200 p-6 z-50"
+                >
+                  <!-- Adults -->
+                  <div class="grid gap-2 text-lg">
+                    <button
+                      class="hover:bg-black hover:text-white rounded-4xl location-option bg-black text-white"
+                    >
+                      New York
+                    </button>
+                    <button
+                      class="hover:bg-black hover:text-white rounded-4xl location-option"
+                    >
+                      California
+                    </button>
+                    <button
+                      class="hover:bg-black hover:text-white rounded-4xl location-option"
+                    >
+                      Texas
+                    </button>
+                  </div>
+                </div>
               </div>
 
               <!-- Check In -->
 
-              <div class="flex-1 px-6 py-5">
-                <label class="block text-xs text-gray-400 mb-2">
-                  Check In
+              <div class="w-full lg:flex-1 px-5 sm:px-6 py-4 sm:py-5">
+                <label class="block mb-2">
+                  <p class="text-xs text-gray-400">Check In</p>
+                  <input
+                    type="date"
+                    class="w-full bg-transparent outline-none font-semibold cursor-pointer"
+                  />
                 </label>
-
-                <input
-                  type="date"
-                  class="w-full bg-transparent outline-none font-semibold cursor-pointer"
-                />
               </div>
 
               <!-- Check Out -->
 
-              <div class="flex-1 px-6 py-5">
-                <label class="block text-xs text-gray-400 mb-2">
-                  Check Out
+              <div class="w-full lg:flex-1 px-5 sm:px-6 py-4 sm:py-5">
+                <label class="block mb-2">
+                  <p class="text-xs text-gray-400">Check Out</p>
+                  <input
+                    type="date"
+                    class="w-full bg-transparent outline-none font-semibold cursor-pointer"
+                  />
                 </label>
-
-                <input
-                  type="date"
-                  class="w-full bg-transparent outline-none font-semibold cursor-pointer"
-                />
               </div>
 
               <!-- Guests -->
 
-              <div class="relative flex-1 px-6 py-5">
+              <div class="relative w-full lg:flex-1 px-5 sm:px-6 py-4 sm:py-5">
                 <button
                   id="guestBtn"
                   class="w-full flex justify-between items-center"
@@ -435,7 +629,7 @@
 
                 <div
                   id="guestMenu"
-                  class="hidden absolute right-0 top-full mt-4 w-80 bg-white rounded-2xl shadow-2xl border border-gray-200 p-6 z-50"
+                  class="hidden absolute right-0 top-full mt-4 w-72 sm:w-80 max-w-[90vw] bg-white rounded-2xl shadow-2xl border border-gray-200 p-6 z-50"
                 >
                   <!-- Adults -->
 
@@ -497,9 +691,9 @@
 
               <!-- Search -->
 
-              <div class="px-5">
+              <div class="w-full lg:w-auto px-5 pt-2 pb-1 lg:pt-0 lg:pb-0">
                 <button
-                  class="hover:text-amber-300 bg-black text-white px-8 py-4 rounded-full flex items-center gap-2 hover:bg-gray-800 transition"
+                  class="w-full lg:w-auto justify-center hover:text-amber-300 bg-black text-white px-8 py-3.5 sm:py-4 rounded-full flex items-center gap-2 hover:bg-gray-800 transition"
                 >
                   <img
                     src="./src/assets/images/search svg.png"
@@ -516,37 +710,41 @@
       </section>
       <!-- featured tours -->
       <section
-        class="w-full flex items-center justify-center pt-40"
+        class="w-full flex items-center justify-center pt-10 sm:pt-16 lg:pt-32"
       >
-        <div class="flex flex-col w-3/4">
+        <div class="flex flex-col w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <!-- first half -->
-          <div class="flex justify-between">
+          <div
+            class="flex flex-col lg:flex-row lg:justify-between gap-6 lg:gap-4"
+          >
             <!-- highlight text -->
             <div class="flex flex-col items-start gap-1.5">
-              <p class="text-5xl font-bold">Our Featured Tours</p>
-              <p class="text-gray-500 text-xl">
+              <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold">
+                Our Featured Tours
+              </h2>
+              <p class="text-gray-500 text-base sm:text-lg lg:text-xl">
                 Favourite destinations based on customer reviews
               </p>
             </div>
             <!-- filters -->
-            <div class="self-end pb-5 flex flex-col">
-              <ul class="flex gap-6">
+            <div class="flex flex-col items-stretch lg:items-end gap-3 lg:pb-5">
+              <ul class="flex flex-wrap gap-3 sm:gap-4 lg:gap-6">
                 <!-- categories -->
                 <li
-                  class="flex flex-col items-center gap-2 relative group  pb-6"
+                  class="flex flex-col items-center gap-2 relative group pb-6"
                 >
                   <div
                     class="rounded-4xl p-3 text-lg flex items-center gap-2 border"
                   >
-                    <div id="category-btn" class="w-20">Categories</div>
+                    <button id="category-btn" class="w-20">Categories</button>
                     <img
                       src="./src/assets/images/arrow-down.svg.png"
-                      alt=""
+                      alt="arrow-down"
                       class="h-4"
                     />
                   </div>
                   <div
-                    class="absolute left-0 mt-16 w-48 rounded-lg bg-white shadow-lg opacity-0 invisible group-hover:visible group-hover:opacity-100 transition duration-200 flex flex-col gap-2"
+                    class="absolute left-0 mt-16 w-48 max-w-[90vw] rounded-lg bg-white shadow-lg opacity-0 invisible group-hover:visible group-hover:opacity-100 transition duration-200 flex flex-col gap-2 z-20"
                   >
                     <button
                       value="all"
@@ -592,15 +790,15 @@
                   <div
                     class="border rounded-4xl p-3 text-lg flex items-center gap-2"
                   >
-                    <span id="duration-btn">Duration</span>
+                    <button id="duration-btn">Duration</button>
                     <img
                       src="./src/assets/images/arrow-down.svg.png"
-                      alt=""
+                      alt="arrow-down"
                       class="h-4"
                     />
                   </div>
                   <div
-                    class="absolute w-64 left-0 mt-16 rounded-lg bg-white shadow-lg opacity-0 invisible group-hover:visible group-hover:opacity-100 transition duration-200 flex flex-col p-5 z-10"
+                    class="absolute w-64 max-w-[90vw] left-0 mt-16 rounded-lg bg-white shadow-lg opacity-0 invisible group-hover:visible group-hover:opacity-100 transition duration-200 flex flex-col p-5 z-20"
                   >
                     <!-- Days -->
 
@@ -666,17 +864,18 @@
                   <div
                     class="border rounded-4xl p-3 text-lg flex items-center gap-2"
                   >
-                    <div id="rating-btn" class="transition duration-1000">Rating</div>
+                    <div id="rating-btn" class="transition duration-1000">
+                      Rating
+                    </div>
                     <img
-                       src="./src/assets/images/arrow-down.svg.png"
-
-                      alt=""
+                      src="./src/assets/images/arrow-down.svg.png"
+                      alt="arrow-down"
                       class="h-4"
                     />
                   </div>
 
                   <div
-                    class="absolute left-0 mt-16 rounded-lg bg-white shadow-lg opacity-0 invisible group-hover:visible group-hover:opacity-100 transition duration-200 flex flex-col gap-2 items-start"
+                    class="absolute left-0 mt-16 max-w-[90vw] rounded-lg bg-white shadow-lg opacity-0 invisible group-hover:visible group-hover:opacity-100 transition duration-200 flex flex-col gap-2 items-start z-20"
                   >
                     <button
                       value="1"
@@ -717,324 +916,950 @@
                   <div
                     class="border rounded-4xl p-3 text-lg flex items-center gap-2"
                   >
-                    <span id="price-range-btn">Price Range</span>
+                    <button id="price-range-btn">Price Range</button>
                     <img
-                       src="./src/assets/images/arrow-down.svg.png"
-                      alt=""
+                      src="./src/assets/images/arrow-down.svg.png"
+                      alt="arrow-down"
                       class="h-4"
                     />
                   </div>
                   <div
-                    class="absolute left-0 mt-16 w-40 rounded-lg bg-white shadow-lg 
-                    opacity-0 invisible group-hover:visible group-hover:opacity-100 
-                    transition duration-200 flex flex-col gap-1 text-lg
-                    "
+                    class="absolute left-0 mt-16 w-40 max-w-[90vw] rounded-lg bg-white shadow-lg opacity-0 invisible group-hover:visible group-hover:opacity-100 transition duration-200 flex flex-col gap-1 text-lg p-2 z-20"
                   >
-                    <div class="flex justify-between p-2">
-                      <label for="From">From :</label>
+                    <div class="flex justify-center p-2">
+                      <!-- <label for="From">From :</label> -->
                       <input
                         type="text"
-                        class="bg-gray-300 w-1/2 text-center rounded-xl "
+                        class="bg-gray-100 w-3/4 text-center rounded-xl"
                         id="ffrom"
+                        placeholder="From"
                       />
                     </div>
-                    <div class="flex justify-between p-2">
-                      <label for="To">To :</label>
+                    <div class="flex justify-center p-2">
+                      <!-- <label for="To">To :</label> -->
                       <input
                         type="text"
-                        class="bg-gray-300 w-1/2 text-center rounded-xl"
+                        class="bg-gray-100 w-3/4 text-center rounded-xl"
+                        placeholder="To"
                         id="fto"
                       />
                     </div>
                     <div class="w-full flex flex-col items-center gap-2">
-                      <button value="0" id="lowSort" class="text-center border rounded-2xl p-2 bg-black text-white sort">Low to High</button>
-                      <button value="1" id="highSort" class="text-center border rounded-2xl p-2 sort">High to Low</button>
+                      <button
+                        value="0"
+                        id="lowSort"
+                        class="text-center border rounded-2xl p-2 bg-black text-white sort"
+                      >
+                        Low to High
+                      </button>
+                      <button
+                        value="1"
+                        id="highSort"
+                        class="text-center border rounded-2xl p-2 sort"
+                      >
+                        High to Low
+                      </button>
                     </div>
-
                   </div>
                 </li>
               </ul>
               <button
-                class="self-end text-center shadow-2xl w-1/4 rounded-4xl bg-black text-white p-2 hover:text-amber-400
-                " id="searchFilter"
+                class="lg:self-end text-center shadow-2xl w-full sm:w-40 lg:w-1/4 rounded-4xl bg-black text-white p-3 hover:text-amber-400"
+                id="searchFilter"
               >
                 Search
               </button>
             </div>
           </div>
           <!-- second half -->
-          <div id="tourSection" class="grid grid-cols-3 gap-5">
+          <div
+            id="tourSection"
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-8 lg:mt-6"
+          ></div>
+        </div>
+      </section>
+      <!-- =======================
+ Top Categories Section
+======================= -->
+      <section class="w-full py-16 mt-20 bg-white">
+        <div class="max-w-7xl mx-auto px-5 lg:px-8">
+          <!-- Heading -->
+          <div
+            class="flex flex-col md:flex-row md:items-center md:justify-between gap-5"
+          >
+            <div>
+              <h2 class="text-3xl md:text-5xl font-bold text-gray-900">
+                Top Categories of Tours
+              </h2>
 
+              <p class="text-gray-500 mt-2">
+                Favorite destinations based on customer reviews
+              </p>
+            </div>
+
+            <button
+              class="bg-black text-white px-6 py-3 rounded-full hover:bg-gray-800 transition flex items-center gap-2 w-fit"
+            >
+              View More
+              <span>→</span>
+            </button>
+          </div>
+
+          <!-- Categories -->
+          <div
+            class="grid grid-cols-1 sm:grid-cols-4 lg:grid-cols-4 gap-6 mt-10"
+          >
+            <!-- Card -->
+            <div
+              class="border rounded-3xl p-3 hover:shadow-xl transition duration-300 cursor-pointer"
+            >
+              <img
+                src="./src/assets/images/Hero bg.avif"
+                alt="Moutain Image"
+                loading="lazy"
+                decoding="async"
+                class="w-full h-40 object-cover rounded-2xl"
+              />
+
+              <div class="flex justify-between items-center mt-4">
+                <div>
+                  <h3 class="font-semibold text-lg">Mountain</h3>
+
+                  <p class="text-gray-500 text-sm">356 Tours, 248 Activities</p>
+                </div>
+
+                <div
+                  class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"
+                >
+                  →
+                </div>
+              </div>
+            </div>
+
+            <!-- Card -->
+            <div
+              class="border rounded-3xl p-3 hover:shadow-xl transition duration-300 cursor-pointer"
+            >
+              <img
+                src="./src/assets/images/Hero bg.avif"
+                alt="Safari Image"
+                loading="lazy"
+                decoding="async"
+                class="w-full h-40 object-cover rounded-2xl"
+              />
+
+              <div class="flex justify-between items-center mt-4">
+                <div>
+                  <h3 class="font-semibold text-lg">Safari</h3>
+
+                  <p class="text-gray-500 text-sm">356 Tours, 248 Activities</p>
+                </div>
+
+                <div
+                  class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"
+                >
+                  →
+                </div>
+              </div>
+            </div>
+
+            <!-- Card -->
+            <div
+              class="border rounded-3xl p-3 hover:shadow-xl transition duration-300 cursor-pointer"
+            >
+              <img
+                src="./src/assets/images/Hero bg.avif"
+                alt="Desert Image"
+                loading="lazy"
+                decoding="async"
+                class="w-full h-40 object-cover rounded-2xl"
+              />
+
+              <div class="flex justify-between items-center mt-4">
+                <div>
+                  <h3 class="font-semibold text-lg">Desert</h3>
+
+                  <p class="text-gray-500 text-sm">356 Tours, 248 Activities</p>
+                </div>
+
+                <div
+                  class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"
+                >
+                  →
+                </div>
+              </div>
+            </div>
+
+            <!-- Card -->
+            <div
+              class="border rounded-3xl p-3 hover:shadow-xl transition duration-300 cursor-pointer"
+            >
+              <img
+                src="./src/assets/images/Hero bg.avif"
+                alt="Flower Image"
+                loading="lazy"
+                decoding="async"
+                class="w-full h-40 object-cover rounded-2xl"
+              />
+
+              <div class="flex justify-between items-center mt-4">
+                <div>
+                  <h3 class="font-semibold text-lg">Flower</h3>
+
+                  <p class="text-gray-500 text-sm">356 Tours, 248 Activities</p>
+                </div>
+
+                <div
+                  class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"
+                >
+                  →
+                </div>
+              </div>
+            </div>
+
+            <!-- Card -->
+            <div
+              class="border rounded-3xl p-3 hover:shadow-xl transition duration-300 cursor-pointer"
+            >
+              <img
+                src="./src/assets/images/Hero bg.avif"
+                alt="Beach Image"
+                loading="lazy"
+                decoding="async"
+                class="w-full h-40 object-cover rounded-2xl"
+              />
+
+              <div class="flex justify-between items-center mt-4">
+                <div>
+                  <h3 class="font-semibold text-lg">Beach</h3>
+
+                  <p class="text-gray-500 text-sm">356 Tours, 248 Activities</p>
+                </div>
+
+                <div
+                  class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"
+                >
+                  →
+                </div>
+              </div>
+            </div>
+
+            <!-- Card -->
+            <div
+              class="border rounded-3xl p-3 hover:shadow-xl transition duration-300 cursor-pointer"
+            >
+              <img
+                src="./src/assets/images/Hero bg.avif"
+                alt="Temples Image"
+                loading="lazy"
+                decoding="async"
+                class="w-full h-40 object-cover rounded-2xl"
+              />
+
+              <div class="flex justify-between items-center mt-4">
+                <div>
+                  <h3 class="font-semibold text-lg">Temples</h3>
+
+                  <p class="text-gray-500 text-sm">356 Tours, 248 Activities</p>
+                </div>
+
+                <div
+                  class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"
+                >
+                  →
+                </div>
+              </div>
+            </div>
+
+            <!-- Card -->
+            <div
+              class="border rounded-3xl p-3 hover:shadow-xl transition duration-300 cursor-pointer"
+            >
+              <img
+                src="./src/assets/images/Hero bg.avif"
+                alt="yacht image"
+                loading="lazy"
+                decoding="async"
+                class="w-full h-40 object-cover rounded-2xl"
+              />
+
+              <div class="flex justify-between items-center mt-4">
+                <div>
+                  <h3 class="font-semibold text-lg">Yacht</h3>
+
+                  <p class="text-gray-500 text-sm">356 Tours, 248 Activities</p>
+                </div>
+
+                <div
+                  class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"
+                >
+                  →
+                </div>
+              </div>
+            </div>
+
+            <!-- Card -->
+            <div
+              class="border rounded-3xl p-3 hover:shadow-xl transition duration-300 cursor-pointer"
+            >
+              <img
+                src="./src/assets/images/Hero bg.avif"
+                alt="Valley image"
+                loading="lazy"
+                decoding="async"
+                class="w-full h-40 object-cover rounded-2xl"
+              />
+
+              <div class="flex justify-between items-center mt-4">
+                <div>
+                  <h3 class="font-semibold text-lg">Valley</h3>
+
+                  <p class="text-gray-500 text-sm">356 Tours, 248 Activities</p>
+                </div>
+
+                <div
+                  class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"
+                >
+                  →
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Promotions -->
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 sm:grid-cols-2 gap-8 mt-20"
+          >
+            <!-- Banner 1 -->
+            <div
+              class="rounded-3xl overflow-hidden relative min-h-[260px] flex items-center bg-sky-200"
+            >
+              <!-- style="background-image: url(./src/assets/images/banner1.png.png);" -->
+
+              <img
+                src="./src/assets/images/banner1.png.png"
+                class="absolute right-0 bottom-0 h-full object-cover"
+                alt
+                loading="lazy"
+                decoding="async"
+              />
+
+              <div class="relative z-10 p-8 max-w-xs">
+                <h3 class="text-4xl font-bold leading-tight">
+                  Waking up
+                  <br />
+                  in a far
+                  <br />
+                  away place
+                </h3>
+
+                <button
+                  class="mt-8 bg-yellow-300 hover:bg-yellow-400 transition px-6 py-3 rounded-full font-semibold"
+                >
+                  View More →
+                </button>
+              </div>
+            </div>
+
+            <!-- Banner 2 -->
+            <div
+              class="rounded-3xl overflow-hidden relative min-h-[260px] flex items-center bg-orange-50"
+            >
+              <!-- style="background-image: url(./src/assets/images/banner2.png.png);" -->
+
+              <img
+                src="./src/assets/images/banner2.png.png"
+                class="absolute right-0 bottom-0 h-full object-cover"
+                alt
+                loading="lazy"
+                decoding="async"
+              />
+
+              <div class="relative z-10 p-8 max-w-xs">
+                <h3 class="text-4xl font-bold leading-tight">
+                  Big promotion
+                  <br />
+                  at the end of
+                  <br />
+                  the year
+                </h3>
+
+                <button
+                  class="mt-8 bg-yellow-300 hover:bg-yellow-400 transition px-6 py-3 rounded-full font-semibold"
+                >
+                  View More →
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
-      <section class="bg-cyan-50 py-20 mt-10">
-    <div class="max-w-3/4 mx-auto">
+      <!-- ================= Luxury Travel Section ================= -->
+      <section class="py-20">
+        <div class="max-w-7xl mx-auto px-5 lg:px-8">
+          <div
+            class="bg-[#F6F5F1] rounded-[32px] p-8 lg:p-14 flex flex-col lg:flex-row items-center gap-12"
+          >
+            <!-- Left Content -->
+            <div class="w-full lg:w-1/2">
+              <span
+                class="inline-block bg-white px-5 py-2 rounded-full text-sm font-medium shadow-sm"
+              >
+                Easy payment
+              </span>
 
-        <!-- Header -->
-        <div class="flex justify-between items-center w-full mb-10">
-          <div>
-            <p class="text-4xl font-bold">Recent Launched Car</p>
-            <p class="text-xl">The world's leading car brands</p>
-          </div>
-          <div>
-            <button class="p-3  rounded-full border" id="prevBtn"><-</button>
-            <button class="p-3  rounded-full border bg-black text-white" id="nextBtn">-></button>
-          </div>
-          
-        </div>
-        
-        <!-- Slider -->
-        <div class="overflow-hidden">
+              <h2
+                class="mt-6 text-4xl lg:text-5xl font-bold leading-tight text-gray-900"
+              >
+                Luxury Travel Redefined:
+                <br />
+                Your Passport to Global
+                <br />
+                Glamour
+              </h2>
 
-            <div id="slider" class="flex  gap-4 transition-transform duration-500">
-              
-                <!-- Card 1 -->
-                <!-- Card 2 -->
-                <!-- Card 3 -->
-
+              <p class="mt-6 text-gray-500 leading-8 max-w-lg">
+                Discover how you can offset your adventure's carbon emissions
+                and support the sustainable initiatives practiced by our
+                operators worldwide.
+              </p>
             </div>
 
-        </div>
-        <div class="flex flex-col gap-10 mt-10">
-          <div>
-            <p class="text-4xl font-bold ">Search by Category</p>
-            <p class="text-xl">There has 30+ Brand Category Available</p>
+            <!-- Right Images -->
+            <div class="w-full lg:w-1/2 flex justify-center gap-4">
+              <!-- Tall Image -->
+              <div class="self-center">
+                <img
+                  src="./src/assets/images/payment.png.png"
+                  alt
+                  class="w-32 h-64 object-cover rounded-[40px]"
+                />
+              </div>
+
+              <!-- Column -->
+              <div class="flex flex-col gap-4">
+                <img
+                  src="./src/assets/images/payment2.png.png"
+                  alt
+                  class="w-32 h-36 object-cover rounded-[32px]"
+                />
+
+                <img
+                  src="./src/assets/images/payment3.png.png"
+                  alt
+                  class="w-32 h-24 object-cover rounded-[32px]"
+                />
+              </div>
+
+              <!-- Column -->
+              <div class="flex flex-col gap-4">
+                <img
+                  src="./src/assets/images/payment4.png.png"
+                  alt
+                  class="w-32 h-24 object-cover rounded-[32px]"
+                />
+
+                <img
+                  src="./src/assets/images/payment5.png.svg"
+                  alt
+                  class="w-32 h-36 object-cover rounded-[32px]"
+                />
+              </div>
+            </div>
           </div>
-          <div class="flex justify-between">
-            <button value="lexus" class="p-2 bg-white car-logo rounded-2xl hover:bg-cyan-300 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"><img src="./src/assets/images/lexus.png.svg" alt=""></button>
-            <button value="mercedes" class="p-2 bg-white car-logo rounded-2xl hover:bg-cyan-300 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"><img src="./src/assets/images/mer.png.png" alt=""></button>
-            <button value="bugatti" class="p-2 bg-white car-logo rounded-2xl hover:bg-cyan-300 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"><img src="./src/assets/images/bugatti.png.png" alt=""></button>
-            <button value="jaguar" class="p-2 bg-white car-logo rounded-2xl hover:bg-cyan-300 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"><img src="./src/assets/images/jaguar.png.png" alt=""></button>
-            <button value="honda" class="p-2 bg-white car-logo rounded-2xl hover:bg-cyan-300 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"><img src="./src/assets/images/honda.png.png" alt=""></button>
-            <button value="chevrolet" class="p-2 bg-white car-logo rounded-2xl hover:bg-cyan-300 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"><img src="./src/assets/images/chevrolet.png.png" alt=""></button>
-            <button value="acura" class="p-2 bg-white car-logo rounded-2xl hover:bg-cyan-300 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"><img src="./src/assets/images/acura.png.png" alt=""></button>
-            <button value="bmw" class="p-2 bg-white car-logo rounded-2xl hover:bg-cyan-300 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"><img src="./src/assets/images/bmw.png.png" alt=""></button>
-            <button value="toyota" class="p-2 bg-white car-logo rounded-2xl hover:bg-cyan-300 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"><img src="./src/assets/images/toyota.png.png" alt=""></button>
+        </div>
+      </section>
+      <!-- ================= Why Travel Section ================= -->
+      <section class="py-20">
+        <div class="max-w-7xl mx-auto px-5 lg:px-8">
+          <!-- Heading -->
+
+          <div class="text-center">
+            <h2 class="text-4xl lg:text-5xl font-bold">Why Travel With Us?</h2>
+
+            <p class="mt-3 text-gray-500">
+              The best booking platform you can trust
+            </p>
+          </div>
+
+          <!-- Cards -->
+
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-14"
+          >
+            <!-- Card -->
+            <div
+              class="bg-cyan-50 rounded-3xl p-8 text-center hover:shadow-xl transition"
+            >
+              <div
+                class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto shadow"
+              >
+                🛡️
+              </div>
+
+              <h3 class="mt-6 text-xl font-semibold">Security Assurance</h3>
+
+              <p class="mt-4 text-gray-500 text-sm leading-7">
+                Demonstrates commitment to user data security through encryption
+                and secure payment practices.
+              </p>
+
+              <button class="mt-6 font-semibold">Learn More →</button>
+            </div>
+
+            <!-- Card -->
+            <div
+              class="bg-pink-50 rounded-3xl p-8 text-center hover:shadow-xl transition"
+            >
+              <div
+                class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto shadow"
+              >
+                👨‍💼
+              </div>
+
+              <h3 class="mt-6 text-xl font-semibold">Trusted Experts</h3>
+
+              <p class="mt-4 text-gray-500 text-sm leading-7">
+                Experienced travel professionals helping you plan your perfect
+                trip.
+              </p>
+
+              <button class="mt-6 font-semibold">Learn More →</button>
+            </div>
+
+            <!-- Card -->
+            <div
+              class="bg-blue-50 rounded-3xl p-8 text-center hover:shadow-xl transition"
+            >
+              <div
+                class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto shadow"
+              >
+                🎒
+              </div>
+
+              <h3 class="mt-6 text-xl font-semibold">Best Experience</h3>
+
+              <p class="mt-4 text-gray-500 text-sm leading-7">
+                Personalized itineraries designed for unforgettable adventures.
+              </p>
+
+              <button class="mt-6 font-semibold">Learn More →</button>
+            </div>
+
+            <!-- Card -->
+            <div
+              class="bg-violet-50 rounded-3xl p-8 text-center hover:shadow-xl transition"
+            >
+              <div
+                class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto shadow"
+              >
+                💳
+              </div>
+
+              <h3 class="mt-6 text-xl font-semibold">Secure Payments</h3>
+
+              <p class="mt-4 text-gray-500 text-sm leading-7">
+                Safe online transactions with trusted payment gateways.
+              </p>
+
+              <button class="mt-6 font-semibold">Learn More →</button>
+            </div>
+          </div>
+
+          <!-- Payment Logos -->
+
+          <div
+            class="mt-20 flex flex-wrap justify-center items-center gap-8 lg:gap-16"
+          >
+            <img
+              src="./src/assets/images/21 → paypal.png.png"
+              class="h-8"
+              alt="PayPal"
+              loading="lazy"
+              decoding="async"
+            />
+
+            <img
+              src="./src/assets/images/21 → stripe.png.png"
+              class="h-8"
+              alt="Stripe"
+              loading="lazy"
+              decoding="async"
+            />
+
+            <img
+              src="./src/assets/images/21 → payoneer.png.png"
+              class="h-8"
+              alt="Payoneer"
+              loading="lazy"
+              decoding="async"
+            />
+
+            <img
+              src="./src/assets/images/21 → visa.png.png"
+              class="h-8"
+              alt="Visa"
+              loading="lazy"
+              decoding="async"
+            />
+
+            <img
+              src="./src/assets/images/21 → cashapp.png.png"
+              class="h-8"
+              alt="Cash App"
+              loading="lazy"
+              decoding="async"
+            />
+
+            <img
+              src="./src/assets/images/21 → bitcoin.png.png"
+              class="h-8"
+              alt="Bitcoin"
+              loading="lazy"
+              decoding="async"
+            />
+
+            <img
+              src="./src/assets/images/21 → discover.png.png"
+              class="h-8"
+              alt="Discover"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
         </div>
-
-    </div>
-
-</section>
-    </main>
-    <footer class="bg-black text-gray-400 pt-14">
-
-    <!-- Container -->
-    <div class="max-w-7xl mx-auto px-6">
-
-        <!-- Newsletter -->
-        <div class="flex flex-col lg:flex-row justify-between items-center gap-8 pb-10 border-b border-gray-800">
-
+      </section>
+      <section class="bg-[#E4F9F9] py-12 sm:py-16 lg:py-20 mt-6 lg:mt-10">
+        <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <!-- Header -->
+          <div
+            class="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full gap-4 mb-8 lg:mb-10"
+          >
             <div>
-                <h2 class="text-4xl font-bold text-white leading-tight">
-                    Subscribe to see secret deals prices <br>
-                    drop the moment you sign up!
-                </h2>
+              <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold">
+                Recent Launched Car
+              </h2>
+              <p class="text-base sm:text-lg lg:text-xl">
+                The world's leading car brands
+              </p>
+            </div>
+            <div class="flex gap-2 shrink-0">
+              <button
+                class="p-4 rounded-full border"
+                id="prevBtn"
+                aria-label="Previous"
+              >
+                <img src="./src/assets/images/left-arrow.png" alt />
+              </button>
+              <button
+                class="p-4 bg-gray-300 rounded-full border"
+                id="nextBtn"
+                aria-label="Next"
+              >
+                <img src="./src/assets/images/right-arrow.png" alt />
+              </button>
+            </div>
+          </div>
+
+          <!-- Slider -->
+          <div class="overflow-hidden">
+            <div
+              id="slider"
+              class="flex gap-4 transition-transform duration-500"
+            >
+              <!-- Card 1 -->
+              <!-- Card 2 -->
+              <!-- Card 3 -->
+            </div>
+          </div>
+          <div class="flex flex-col gap-6 sm:gap-8 lg:gap-10 mt-8 lg:mt-10">
+            <div>
+              <p class="text-2xl sm:text-3xl lg:text-4xl font-bold">
+                Search by Category
+              </p>
+              <p class="text-base sm:text-lg lg:text-xl">
+                There has 30+ Brand Category Available
+              </p>
+            </div>
+            <div
+              class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-9 gap-4 place-items-center"
+            >
+              <button
+                value="lexus"
+                class="p-2 bg-white car-logo rounded-2xl hover:bg-cyan-300 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
+              >
+                <img
+                  src="./src/assets/images/lexus.png.svg"
+                  alt="Lexus"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </button>
+              <button
+                value="mercedes"
+                class="p-2 bg-white car-logo rounded-2xl hover:bg-cyan-300 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
+              >
+                <img
+                  src="./src/assets/images/mer.png.png"
+                  alt="Mercedes"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </button>
+              <button
+                value="bugatti"
+                class="p-2 bg-white car-logo rounded-2xl hover:bg-cyan-300 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
+              >
+                <img
+                  src="./src/assets/images/bugatti.png.png"
+                  alt="Bugatti"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </button>
+              <button
+                value="jaguar"
+                class="p-2 bg-white car-logo rounded-2xl hover:bg-cyan-300 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
+              >
+                <img
+                  src="./src/assets/images/jaguar.png.png"
+                  alt="Jaguar"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </button>
+              <button
+                value="honda"
+                class="p-2 bg-white car-logo rounded-2xl hover:bg-cyan-300 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
+              >
+                <img
+                  src="./src/assets/images/honda.png.png"
+                  alt="Honda"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </button>
+              <button
+                value="chevrolet"
+                class="p-2 bg-white car-logo rounded-2xl hover:bg-cyan-300 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
+              >
+                <img
+                  src="./src/assets/images/chevrolet.png.png"
+                  alt="Chevvy"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </button>
+              <button
+                value="acura"
+                class="p-2 bg-white car-logo rounded-2xl hover:bg-cyan-300 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
+              >
+                <img
+                  src="./src/assets/images/acura.png.png"
+                  alt="Acura"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </button>
+              <button
+                value="bmw"
+                class="p-2 bg-white car-logo rounded-2xl hover:bg-cyan-300 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
+              >
+                <img
+                  src="./src/assets/images/bmw.png.png"
+                  alt="BMW"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </button>
+              <button
+                value="toyota"
+                class="p-2 bg-white car-logo rounded-2xl hover:bg-cyan-300 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
+              >
+                <img
+                  src="./src/assets/images/toyota.png.png"
+                  alt="toyota"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="bg-black text-gray-400 pt-10 sm:pt-14">
+      <!-- Container -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Newsletter -->
+        <div
+          class="flex flex-col lg:flex-row justify-between items-center gap-8 pb-10 border-b border-gray-800 text-center lg:text-left"
+        >
+          <div>
+            <h2
+              class="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight"
+            >
+              Subscribe to see secret deals prices
+              <br class="hidden sm:block" />
+              drop the moment you sign up!
+            </h2>
+          </div>
+
+          <div
+            class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full lg:w-auto"
+          >
+            <div
+              class="flex items-center bg-transparent border border-gray-700 rounded-full px-5 py-3 w-full sm:w-80 lg:w-96"
+            >
+              <span class="text-gray-500 mr-3">✉️</span>
+
+              <input
+                type="email"
+                placeholder="Enter your email"
+                class="bg-transparent outline-none text-white placeholder-gray-500 flex-1 min-w-0"
+              />
             </div>
 
-            <div class="flex items-center">
-
-                <div
-                    class="flex items-center bg-transparent border border-gray-700 rounded-full px-5 py-3 w-96">
-
-                    <span class="text-gray-500 mr-3">✉️</span>
-
-                    <input
-                        type="email"
-                        placeholder="Enter your email"
-                        class="bg-transparent outline-none text-white placeholder-gray-500 flex-1">
-
-                </div>
-
-                <button
-                    class="ml-4 bg-yellow-400 hover:bg-yellow-300 text-black font-semibold px-8 py-4 rounded-full transition">
-
-                    Subscribe
-
-                </button>
-
-            </div>
-
+            <button
+              class="bg-yellow-400 hover:bg-yellow-300 text-black font-semibold px-8 py-4 rounded-full transition w-full sm:w-auto shrink-0"
+            >
+              Subscribe
+            </button>
+          </div>
         </div>
 
         <!-- Main Footer -->
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10 py-14">
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10 py-14"
+        >
+          <!-- Logo -->
 
-            <!-- Logo -->
+          <div class="lg:col-span-2">
+            <h2 class="text-4xl font-bold text-white mb-6">🌴 Travila</h2>
 
-            <div class="lg:col-span-2">
+            <div class="space-y-4">
+              <p>
+                📍 4517 Washington Ave. Manchester,<br />
+                Kentucky 39495
+              </p>
 
-                <h2 class="text-4xl font-bold text-white mb-6">
-                    🌴 Travila
-                </h2>
+              <p>🕒 Hours: 8:00 - 17:00, Mon - Sat</p>
 
-                <div class="space-y-4">
-
-                    <p>
-                        📍 4517 Washington Ave. Manchester,<br>
-                        Kentucky 39495
-                    </p>
-
-                    <p>
-                        🕒 Hours: 8:00 - 17:00, Mon - Sat
-                    </p>
-
-                    <p>
-                        ✉️ support@travila.com
-                    </p>
-
-                </div>
-
-                <div class="mt-8">
-
-                    <p class="text-white">
-                        📞 Need help? Call us
-                    </p>
-
-                    <h3 class="text-yellow-400 text-3xl font-bold mt-2">
-                        1-800-222-8888
-                    </h3>
-
-                </div>
-
+              <p>✉️ support@travila.com</p>
             </div>
 
-            <!-- Support -->
+            <div class="mt-8">
+              <p class="text-white">📞 Need help? Call us</p>
 
-            <div>
-
-                <h3 class="text-white text-xl font-semibold mb-6">
-                    Support
-                </h3>
-
-                <ul class="space-y-4">
-
-                    <li><a href="#" class="hover:text-white">Forum Support</a></li>
-
-                    <li><a href="#" class="hover:text-white">Help Center</a></li>
-
-                    <li><a href="#" class="hover:text-white">Live Chat</a></li>
-
-                    <li><a href="#" class="hover:text-white">How it works</a></li>
-
-                    <li><a href="#" class="hover:text-white">Security</a></li>
-
-                    <li><a href="#" class="hover:text-white">Privacy</a></li>
-
-                    <li><a href="#" class="hover:text-white">Charges logs</a></li>
-
-                </ul>
-
+              <h3 class="text-yellow-400 text-3xl font-bold mt-2">
+                1-800-222-8888
+              </h3>
             </div>
+          </div>
 
-            <!-- Company -->
+          <!-- Support -->
 
-            <div>
+          <div>
+            <h3 class="text-white text-xl font-semibold mb-6">Support</h3>
 
-                <h3 class="text-white text-xl font-semibold mb-6">
-                    Company
-                </h3>
+            <ul class="space-y-4">
+              <li><a href="#" class="hover:text-white">Forum Support</a></li>
 
-                <ul class="space-y-4">
+              <li><a href="#" class="hover:text-white">Help Center</a></li>
 
-                    <li><a href="#" class="hover:text-white">About Us</a></li>
+              <li><a href="#" class="hover:text-white">Live Chat</a></li>
 
-                    <li><a href="#" class="hover:text-white">Community Blog</a></li>
+              <li><a href="#" class="hover:text-white">How it works</a></li>
 
-                    <li><a href="#" class="hover:text-white">Jobs & Careers</a></li>
+              <li><a href="#" class="hover:text-white">Security</a></li>
 
-                    <li><a href="#" class="hover:text-white">Contact Us</a></li>
+              <li><a href="#" class="hover:text-white">Privacy</a></li>
 
-                    <li><a href="#" class="hover:text-white">Our Awards</a></li>
+              <li><a href="#" class="hover:text-white">Charges logs</a></li>
+            </ul>
+          </div>
 
-                    <li><a href="#" class="hover:text-white">Agencies</a></li>
+          <!-- Company -->
 
-                </ul>
+          <div>
+            <h3 class="text-white text-xl font-semibold mb-6">Company</h3>
 
-            </div>
+            <ul class="space-y-4">
+              <li><a href="#" class="hover:text-white">About Us</a></li>
 
-            <!-- Services -->
+              <li><a href="#" class="hover:text-white">Community Blog</a></li>
 
-            <div>
+              <li><a href="#" class="hover:text-white">Jobs & Careers</a></li>
 
-                <h3 class="text-white text-xl font-semibold mb-6">
-                    Services
-                </h3>
+              <li><a href="#" class="hover:text-white">Contact Us</a></li>
 
-                <ul class="space-y-4">
+              <li><a href="#" class="hover:text-white">Our Awards</a></li>
 
-                    <li><a href="#" class="hover:text-white">Tour Guide</a></li>
+              <li><a href="#" class="hover:text-white">Agencies</a></li>
+            </ul>
+          </div>
 
-                    <li><a href="#" class="hover:text-white">Tour Booking</a></li>
+          <!-- Services -->
 
-                    <li><a href="#" class="hover:text-white">Hotel Booking</a></li>
+          <div>
+            <h3 class="text-white text-xl font-semibold mb-6">Services</h3>
 
-                    <li><a href="#" class="hover:text-white">Ticket Booking</a></li>
+            <ul class="space-y-4">
+              <li><a href="#" class="hover:text-white">Tour Guide</a></li>
 
-                    <li><a href="#" class="hover:text-white">Rental Services</a></li>
+              <li><a href="#" class="hover:text-white">Tour Booking</a></li>
 
-                </ul>
+              <li><a href="#" class="hover:text-white">Hotel Booking</a></li>
 
-            </div>
+              <li><a href="#" class="hover:text-white">Ticket Booking</a></li>
 
-            <!-- Legal -->
+              <li><a href="#" class="hover:text-white">Rental Services</a></li>
+            </ul>
+          </div>
 
-            <div>
+          <!-- Legal -->
 
-                <h3 class="text-white text-xl font-semibold mb-6">
-                    Legal
-                </h3>
+          <div>
+            <h3 class="text-white text-xl font-semibold mb-6">Legal</h3>
 
-                <ul class="space-y-4">
+            <ul class="space-y-4">
+              <li><a href="#" class="hover:text-white">Terms of Service</a></li>
 
-                    <li><a href="#" class="hover:text-white">Terms of Service</a></li>
+              <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
 
-                    <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
+              <li><a href="#" class="hover:text-white">Cookies Policy</a></li>
 
-                    <li><a href="#" class="hover:text-white">Cookies Policy</a></li>
+              <li><a href="#" class="hover:text-white">Data Processing</a></li>
 
-                    <li><a href="#" class="hover:text-white">Data Processing</a></li>
+              <li><a href="#" class="hover:text-white">Data Policy</a></li>
 
-                    <li><a href="#" class="hover:text-white">Data Policy</a></li>
-
-                    <li><a href="#" class="hover:text-white">Refund Policy</a></li>
-
-                </ul>
-
-            </div>
-
+              <li><a href="#" class="hover:text-white">Refund Policy</a></li>
+            </ul>
+          </div>
         </div>
 
         <!-- Bottom -->
 
         <div
-            class="border-t border-gray-800 py-8 flex flex-col md:flex-row justify-between items-center">
+          class="border-t border-gray-800 py-8 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left"
+        >
+          <p>© 2024 Travila Inc. All rights reserved.</p>
 
-            <p>
-                © 2024 Travila Inc. All rights reserved.
-            </p>
+          <div
+            class="flex flex-wrap items-center justify-center gap-3 sm:gap-5"
+          >
+            <span class="text-white font-semibold"> Follow us </span>
 
-            <div class="flex items-center gap-5">
+            <a href="#" class="hover:text-white">Facebook</a>
 
-                <span class="text-white font-semibold">
-                    Follow us
-                </span>
+            <a href="#" class="hover:text-white">Instagram</a>
 
-                <a href="#" class="hover:text-white">Facebook</a>
-
-                <a href="#" class="hover:text-white">Instagram</a>
-
-                <a href="#" class="hover:text-white">Twitter</a>
-
-            </div>
-
+            <a href="#" class="hover:text-white">Twitter</a>
+          </div>
         </div>
-
-    </div>
-
-</footer>
+      </div>
+    </footer>
     <script type="module" src="./src/js/index.js"></script>
   </body>
 </html>
