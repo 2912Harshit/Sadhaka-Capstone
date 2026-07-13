@@ -42,7 +42,7 @@ function tourCard(tour) {
               <div class="flex justify-between items-start p-2 sm:p-3 gap-2">
                 <div class="rounded-4xl px-3 py-1 sm:w-1/3 flex items-center justify-center bg-white text-amber-300 text-xs sm:text-sm whitespace-nowrap">Top Rated</div>
                 <button class="rounded-full p-1.5 sm:p-2 bg-white hover:text-red-500 text-xs sm:text-sm shrink-0">
-                <img src="./src/assets/images/heart.png" alt="heart">
+                <img src="./src/assets/images/heart.avif" alt="heart">
                 </button>
               </div>
               <div
@@ -122,7 +122,7 @@ function carCard(car) {
     <button
       class="absolute top-2 sm:top-3 right-2 sm:right-3 rounded-full p-1.5 sm:p-2 bg-white hover:text-red-500 text-xs sm:text-sm"
     >
-      <img src="./src/assets/images/heart.png" alt="heart" >
+      <img src="./src/assets/images/heart.avif" alt="heart" >
     </button>
   </div>
 
