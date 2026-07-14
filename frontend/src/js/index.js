@@ -5,8 +5,17 @@
 // import "../css/components.css";
 // import "../css/utilities.css";
 
-import { renderCars, renderTours, renderAll } from "./components.js";
+import {
+  renderCars,
+  renderTours,
+  renderAll,
+  renderTopCategoryTours,
+  renderNews,
+  renderHotels,
+  renderTestimonials,
+} from "./components.js";
 
+import { createSlider, getVisibleCards } from "./slider.js";
 // Initialize the application
 // document.addEventListener("DOMContentLoaded", async () => {
 //   console.log("Application initialized");
@@ -61,6 +70,7 @@ import { renderCars, renderTours, renderAll } from "./components.js";
 let cars;
 let tours;
 let allData;
+let hotels;
 
 const overlay = document.getElementById("bookingOverlay");
 const formView = document.getElementById("bookingFormView");
@@ -83,6 +93,7 @@ const badgeColors = {
   allSearch: "bg-blue-500/80",
   car: "bg-purple-500/80",
   tour: "bg-orange-500/80",
+  hotel: "bg-emerald-500/80",
 };
 
 // ================================
@@ -100,15 +111,17 @@ document.addEventListener("click", function (e) {
       currentCardData = cars.find((item) => item.id == id);
     } else if (type == "tour") {
       currentCardData = tours.find((item) => item.id == id);
-    } else {
+    } else if (type == "allSearch") {
       currentCardData = allData.find((item) => item.id == id);
+    } else if (type == "hotel") {
+      currentCardData = hotels.find((item) => item.id == id);
     }
     console.log(currentCardData);
-    openModal(currentCardData,type);
+    openModal(currentCardData, type);
   }
 });
 
-function openModal(data,type) {
+function openModal(data, type) {
   overlay.classList.remove("hidden");
   overlay.classList.add("flex");
   formView.classList.remove("hidden");
@@ -125,18 +138,18 @@ function openModal(data,type) {
   guestsWrapper.classList.add("hidden");
 
   if (type === "allSearch") {
-    renderTourFields(data,type);
+    renderTourFields(data, type);
   } else if (type === "car") {
-    renderCarFields(data,type);
-  } else if (type === "tour") {
-    renderAdventureFields(data,type);
+    renderCarFields(data, type);
+  } else if (type === "tour" || type === "hotel") {
+    renderAdventureFields(data, type);
   }
 
   calculateTotal();
 }
 
 // ---------- TOUR FIELDS ----------
-function renderTourFields(data,type) {
+function renderTourFields(data, type) {
   infoBar.innerHTML = `
     <span><i class="fa-solid fa-location-dot text-blue-500"></i> ${data.location}</span>
     <span><i class="fa-solid fa-tag text-blue-500"></i> $${data.price}/person</span>
@@ -163,12 +176,16 @@ function renderTourFields(data,type) {
 
   // These are fine to attach directly since they're inside the modal
   // (modal content isn't re-rendered by your data fetching, only cards are)
-  document.getElementById("adults").addEventListener("input", ()=> {calculateTotal(type)});
-  document.getElementById("children").addEventListener("input", ()=> {calculateTotal(type)});
+  document.getElementById("adults").addEventListener("input", () => {
+    calculateTotal(type);
+  });
+  document.getElementById("children").addEventListener("input", () => {
+    calculateTotal(type);
+  });
 }
 
 // ---------- CAR FIELDS ----------
-function renderCarFields(data,type) {
+function renderCarFields(data, type) {
   infoBar.innerHTML = `
     <span><i class="fa-solid fa-location-dot text-purple-500"></i> ${data.location}</span>
     <span><i class="fa-solid fa-gas-pump text-purple-500"></i> ${data.fuel}</span>
@@ -199,16 +216,16 @@ function renderCarFields(data,type) {
     </div>
   `;
 
-  document
-    .getElementById("pickupDate")
-    .addEventListener("change",()=> {calculateTotal(type)});
-  document
-    .getElementById("returnDate")
-    .addEventListener("change",()=> {calculateTotal(type)});
+  document.getElementById("pickupDate").addEventListener("change", () => {
+    calculateTotal(type);
+  });
+  document.getElementById("returnDate").addEventListener("change", () => {
+    calculateTotal(type);
+  });
 }
 
 // ---------- ADVENTURE FIELDS ----------
-function renderAdventureFields(data,type) {
+function renderAdventureFields(data, type) {
   infoBar.innerHTML = `
     <span><i class="fa-solid fa-clock text-orange-500"></i> ${data.days} Days / ${data.nights} Nights</span>
     <span><i class="fa-solid fa-tag text-orange-500"></i> $${data.price}/person</span>
@@ -226,15 +243,19 @@ function renderAdventureFields(data,type) {
     </div>
   `;
 
-  document.getElementById("adults").addEventListener("input", ()=> {calculateTotal(type)});
-  document.getElementById("children").addEventListener("input", ()=> {calculateTotal(type)});
+  document.getElementById("adults").addEventListener("input", () => {
+    calculateTotal(type);
+  });
+  document.getElementById("children").addEventListener("input", () => {
+    calculateTotal(type);
+  });
 }
 
 // ---------- PRICE CALCULATION ----------
 function calculateTotal(type) {
   // const type = currentCardData.type;
   const price = parseFloat(currentCardData.price);
-  let total = 0;
+  let total = price;
 
   if (type === "tour" || type === "allSearch") {
     const adults = parseInt(document.getElementById("adults")?.value || 1);
@@ -301,7 +322,6 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") closeBookingModal();
 });
 
-
 // Modal Overlay
 const signupBtns = document.querySelectorAll("#signupBtn");
 const modalOverlay = document.getElementById("modalOverlay");
@@ -350,45 +370,48 @@ signupFormElement.addEventListener("submit", (e) => {
   }, 2000);
 });
 
-const searchFilter={
-  type:"tours",
-  location:"new york",
-  checkIn:"",
-  checkOut:"",
-  guests:{
-    adults:2,
-    children:2
-  }
+const searchFilter = {
+  type: "tours",
+  location: "new york",
+  checkIn: "",
+  checkOut: "",
+  guests: {
+    adults: 2,
+    children: 2,
+  },
 };
 // sliding indicator
 const tabs = document.querySelectorAll(".tab");
 const indicator = document.getElementById("indicator");
+let currentBtn = tabs[0];
 
-function moveIndicator(button) {
-  indicator.style.width = button.offsetWidth + "px";
+function moveIndicator() {
+  indicator.style.width = currentBtn.offsetWidth + "px";
 
-  indicator.style.height = button.offsetHeight + "px";
+  indicator.style.height = currentBtn.offsetHeight + "px";
 
-  indicator.style.left = button.offsetLeft + "px";
+  indicator.style.left = currentBtn.offsetLeft + "px";
 
-  indicator.style.top = button.offsetTop + "px";
+  indicator.style.top = currentBtn.offsetTop + "px";
 }
 
-moveIndicator(tabs[0]);
+moveIndicator();
 
 tabs.forEach((tab) => {
   tab.addEventListener("click", () => {
-    moveIndicator(tab);
+    currentBtn = tab;
+    moveIndicator();
     tabs.forEach((tab) => {
       tab.classList.remove("text-amber-300");
       tab.classList.add("text-gray-500");
     });
     tab.classList.add("text-amber-300");
     tab.classList.remove("text-gray-500");
-    searchFilter.type=tab.value;
+    searchFilter.type = tab.value;
     // console.log(searchFilter);
   });
 });
+window.addEventListener("resize", moveIndicator);
 
 let locationOptions = document.querySelectorAll(".location-option");
 let locationText = document.getElementById("location-text");
@@ -406,7 +429,7 @@ locationOptions.forEach((location) => {
     location.classList.add("bg-black", "text-white");
     locationText.innerText = location.innerText;
     // console.log("yuhu");
-    searchFilter.location=location.value;
+    searchFilter.location = location.value;
     locationMenu.classList.add("hidden");
   });
 });
@@ -428,43 +451,42 @@ let childCountSpan = document.getElementById("childCount");
 
 let guestText = document.getElementById("guestText");
 
-let checkInInput=document.getElementById("check-in-input");
-let checkOutInput=document.getElementById("check-out-input");
-let searchAll=document.getElementById("search-all");
-let allSection=document.getElementById("all-section");
+let checkInInput = document.getElementById("check-in-input");
+let checkOutInput = document.getElementById("check-out-input");
+let searchAll = document.getElementById("search-all");
+let allSection = document.getElementById("all-section");
 
-checkInInput.addEventListener("change",()=>{
-  searchFilter.checkIn=checkInInput.value;
-  console.log((checkInInput.value))
-})
-checkOutInput.addEventListener("change",()=>{
-  searchFilter.checkOut=checkOutInput.value;
-})
-
+checkInInput.addEventListener("change", () => {
+  searchFilter.checkIn = checkInInput.value;
+  console.log(checkInInput.value);
+});
+checkOutInput.addEventListener("change", () => {
+  searchFilter.checkOut = checkOutInput.value;
+});
 
 adultMinusBtn.addEventListener("click", () => {
   changeCount(adultCountSpan, -1);
   guestText.innerText = `${adultCountSpan.innerText} Adults, ${childCountSpan.innerText} Children`;
-  searchFilter.guests.adults=parseInt(adultCountSpan.innerHTML);
-  searchFilter.guests.children=parseInt(childCountSpan.innerHTML);
+  searchFilter.guests.adults = parseInt(adultCountSpan.innerHTML);
+  searchFilter.guests.children = parseInt(childCountSpan.innerHTML);
 });
 adultPlusBtn.addEventListener("click", () => {
   changeCount(adultCountSpan, 1);
   guestText.innerText = `${adultCountSpan.innerText} Adults, ${childCountSpan.innerText} Children`;
-  searchFilter.guests.adults=parseInt(adultCountSpan.innerHTML);
-  searchFilter.guests.children=parseInt(childCountSpan.innerHTML);
+  searchFilter.guests.adults = parseInt(adultCountSpan.innerHTML);
+  searchFilter.guests.children = parseInt(childCountSpan.innerHTML);
 });
 childMinusBtn.addEventListener("click", () => {
   changeCount(childCountSpan, -1);
   guestText.innerText = `${adultCountSpan.innerText} Adults, ${childCountSpan.innerText} Children`;
-  searchFilter.guests.adults=parseInt(adultCountSpan.innerHTML);
-  searchFilter.guests.children=parseInt(childCountSpan.innerHTML);
+  searchFilter.guests.adults = parseInt(adultCountSpan.innerHTML);
+  searchFilter.guests.children = parseInt(childCountSpan.innerHTML);
 });
 childPlusBtn.addEventListener("click", () => {
   changeCount(childCountSpan, 1);
   guestText.innerText = `${adultCountSpan.innerText} Adults, ${childCountSpan.innerText} Children`;
-  searchFilter.guests.adults=parseInt(adultCountSpan.innerHTML);
-  searchFilter.guests.children=parseInt(childCountSpan.innerHTML);
+  searchFilter.guests.adults = parseInt(adultCountSpan.innerHTML);
+  searchFilter.guests.children = parseInt(childCountSpan.innerHTML);
 });
 
 function changeCount(countSpan, delta) {
@@ -477,24 +499,21 @@ function changeCount(countSpan, delta) {
   countSpan.innerText = newCount;
 }
 
-
-searchAll.addEventListener("click",()=>{
-  console.log("insise")
+searchAll.addEventListener("click", () => {
+  console.log("insise");
   getAll();
-})
+});
 
-async function getAll(){
+async function getAll() {
   try {
-    const response=await fetch("./src/data/search.json");
-    allData=await response.json();
+    const response = await fetch("./src/data/search.json");
+    allData = await response.json();
     // console.log(data);
-    renderAll(allSection,allData,searchFilter);
+    renderAll(allSection, allData, searchFilter);
   } catch (error) {
     console.log(error.message);
   }
 }
-
-
 
 let daysMinusBtn = document.getElementById("daysMinusBtn");
 let daysPlusBtn = document.getElementById("daysPlusBtn");
@@ -611,7 +630,6 @@ categories.forEach((cat) => {
   });
 });
 
-
 let tourSection = document.getElementById("tourSection");
 
 async function getTours() {
@@ -630,101 +648,41 @@ async function getTours() {
 }
 getTours();
 
-let nextBtn = document.getElementById("nextBtn");
-let prevBtn = document.getElementById("prevBtn");
-let slider = document.getElementById("slider");
+// import { createSlider, getVisibleCards } from "./slider.js";
 
-let currentIndex = 0;
+const slider = document.getElementById("slider");
 
-// Matches the card widths in carCard(): 1 card on mobile, 2 on tablet, 3 on laptop+
-function getVisibleCards() {
-  if (window.innerWidth < 640) return 1;
-  if (window.innerWidth < 1024) return 2;
-  return 3;
-}
-let maxIndex = slider.children.length - getVisibleCards();
-const gap = 16;
+const nextBtn = document.getElementById("nextBtn");
+
+const prevBtn = document.getElementById("prevBtn");
 
 const carFilters = {
   brand: new Set(),
 };
+
 async function getCars() {
-  try {
-    // console.log("entered");
-    const response = await fetch("./src/data/cars_cards.json");
-    if (!response.ok) {
-      throw new Error("Failed to load cars");
-    }
-    cars = await response.json();
-    // console.log(cars);
-    renderCars(slider, cars, carFilters);
-    // updateSlider();
-  } catch (error) {
-    console.log(error.message);
-  }
+  const res = await fetch("./src/data/cars_cards.json");
+
+  cars = await res.json();
+
+  renderCars(slider, cars, carFilters);
+
+  carSlider.refresh();
 }
+
+const carSlider = createSlider({
+  slider,
+
+  nextBtn,
+
+  prevBtn,
+
+  getVisibleCards,
+
+  gap: 16,
+});
+
 getCars();
-
-// carousel slider
-
-function updateSlider() {
-  const card = slider.children[0];
-  const move = card.offsetWidth + gap;
-  maxIndex = slider.children.length - getVisibleCards();
-
-  slider.style.transform = `translateX(-${currentIndex * move}px)`;
-}
-
-function handleNavBtn() {
-  if (currentIndex == maxIndex) {
-    nextBtn.classList.remove("bg-gray-300");
-    // nextBtn.classList.remove("text-white");
-  }
-  if (currentIndex > 0) {
-    prevBtn.classList.add("bg-gray-300");
-    // prevBtn.classList.add("text-white");
-  }
-  if (currentIndex == 0) {
-    prevBtn.classList.remove("bg-gray-300");
-    // prevBtn.classList.remove("text-white");
-  }
-  if (currentIndex < maxIndex) {
-    nextBtn.classList.add("bg-gray-300");
-    // nextBtn.classList.add("text-white");
-  }
-}
-
-nextBtn.addEventListener("click", () => {
-  updateSlider();
-  if (currentIndex >= maxIndex) return;
-  currentIndex++;
-  handleNavBtn();
-  // console.log(slider.children.length);
-  slider.style.transform = `translateX(-${currentIndex * (slider.children[0].offsetWidth + gap)}px)`;
-});
-prevBtn.addEventListener("click", () => {
-  updateSlider();
-  if (currentIndex == 0) return;
-  currentIndex--;
-  handleNavBtn();
-  slider.style.transform = `translateX(-${currentIndex * (slider.children[0].offsetWidth + gap)}px)`;
-});
-
-// keep the slider in a valid position if the viewport crosses a breakpoint
-// (mobile shows 1 card, tablet 2, laptop+ 3 - see getVisibleCards())
-let resizeTimeout;
-window.addEventListener("resize", () => {
-  clearTimeout(resizeTimeout);
-  resizeTimeout = setTimeout(() => {
-    maxIndex = slider.children.length - getVisibleCards();
-    if (currentIndex > maxIndex) {
-      currentIndex = Math.max(0, maxIndex);
-    }
-    updateSlider();
-    handleNavBtn();
-    moveIndicator(tabs[0]);
-  }, 150);
-});
 
 // carLogos btn
 let carLogos = document.querySelectorAll(".car-logo");
@@ -743,9 +701,163 @@ carLogos.forEach((logo) => {
       logo.classList.add("bg-white");
       logo.classList.remove("bg-cyan-300", "shadow-2xl", "-translate-y-2");
     }
-    currentIndex = 0;
-    updateSlider();
-    handleNavBtn();
+    carSlider.setCurrentIndex(0);
+    carSlider.refresh();
     getCars();
   });
 });
+
+let topCategoryToursVM = document.getElementById("top-category-tours-vm");
+let topCategoryTourSection = document.getElementById(
+  "top-category-tour-section",
+);
+const topCategoryTourFilter = {
+  view: 1,
+};
+topCategoryToursVM.addEventListener("click", () => {
+  if (topCategoryToursVM.dataset.type == 0) {
+    topCategoryToursVM.children[0].innerText = "View Less";
+    topCategoryTourFilter.view = 0;
+    topCategoryToursVM.dataset.type = 1;
+  } else {
+    topCategoryToursVM.children[0].innerText = "View More";
+    topCategoryTourFilter.view = 1;
+    topCategoryToursVM.dataset.type = 0;
+  }
+  getTopCategoryTours();
+});
+
+async function getTopCategoryTours() {
+  try {
+    const response = await fetch("./src/data/topCategoryTours.json");
+    if (!response.ok) {
+      throw new Error("getTopCategoryTours response failed");
+    }
+    const data = await response.json();
+    renderTopCategoryTours(topCategoryTourSection, data, topCategoryTourFilter);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+getTopCategoryTours();
+
+let newsVM = document.getElementById("news-vm");
+let newsSection = document.getElementById("news-section");
+const newsFilter = {
+  view: 1,
+};
+newsVM.addEventListener("click", () => {
+  console.log(newsFilter);
+  if (newsVM.dataset.type == 0) {
+    newsVM.children[0].innerText = "View Less";
+    newsFilter.view = 0;
+    newsVM.dataset.type = 1;
+  } else {
+    newsVM.children[0].innerText = "View More";
+    newsFilter.view = 1;
+    newsVM.dataset.type = 0;
+  }
+  getNews();
+});
+
+async function getNews() {
+  try {
+    const response = await fetch("./src/data/news.json");
+    if (!response.ok) {
+      throw new Error("getNews response failed");
+    }
+    const data = await response.json();
+    renderNews(newsSection, data, newsFilter);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+getNews();
+
+const hSlider = document.getElementById("hotelSlider");
+const hotelPrevBtn = document.getElementById("hotelPrev");
+const hotelNextBtn = document.getElementById("hotelNext");
+
+async function getHotels() {
+  try {
+    const response = await fetch("./src/data/hotel.json");
+    if (!response.ok) {
+      throw new Error("getHotels response error");
+    }
+    hotels = await response.json();
+    renderHotels(hSlider, hotels);
+    hotelSlider.refresh();
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+console.log(hSlider);
+const hotelSlider = createSlider({
+  slider: hSlider,
+  nextBtn: hotelNextBtn,
+  prevBtn: hotelPrevBtn,
+  getVisibleCards,
+  gap: 16,
+});
+console.log(hotelSlider);
+
+getHotels();
+
+let tSlider = document.getElementById("testimonialSlider");
+let testimonialPrev = document.getElementById("testimonialPrev");
+let testimonialNext = document.getElementById("testimonialNext");
+
+async function getTestimonials() {
+  try {
+    const response = await fetch("./src/data/testimonial.json");
+    if (!response.ok) {
+      throw new Error("getTestimonials response error");
+    }
+    const data = await response.json();
+    renderTestimonials(tSlider, data);
+    testimonialSlider.refresh();
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+const testimonialSlider = createSlider({
+  slider: tSlider,
+  nextBtn: testimonialNext,
+  prevBtn: testimonialPrev,
+  getVisibleCards,
+  gap: 16,
+});
+getTestimonials();
+
+// subscribe form
+const form = document.getElementById("subscribeForm");
+const toast = document.getElementById("toast");
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  toast.classList.remove("opacity-0", "translate-x-30");
+  toast.classList.add("opacity-100", "translate-x-0");
+
+  setTimeout(() => {
+    toast.classList.remove("opacity-100", "translate-x-0");
+    toast.classList.add("opacity-0", "translate-x-30");
+  }, 3000);
+
+  form.reset();
+});
+
+function hide(e) {
+  e.parentElement.children[0].classList.toggle("hidden");
+  e.parentElement.children[1].classList.toggle("hidden");
+}
+window.hide = hide;
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("./sw.js")
+      .then(() => console.log("Service Worker Registered"))
+      .catch(console.error);
+  });
+}
